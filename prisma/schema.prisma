@@ -10,9 +10,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// model User {
+//   id       Int     @id @default(autoincrement())
+//   email    String? @unique
+//   username String
+//   password String
+// }
+
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String? @unique
-  username String
-  password String
+  id               Int       @id @default(autoincrement())
+  name             String
+  sentMessages     Message[] @relation("sentMessages")
+  receivedMessages Message[] @relation("receivedMessages")
+ 
+}
+
+model Message {
+  id         Int    @id
+  text       String
+  sender     User   @relation(name: "sentMessages", fields: [senderId], references: [id])
+  receiver   User   @relation(name: "receivedMessages", fields: [receiverId], references: [id])
+  senderId   Int
+  receiverId Int
+
 }
