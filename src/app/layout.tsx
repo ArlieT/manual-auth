@@ -18,9 +18,9 @@ export default function RootLayout({
 }) {
   const router = useRouter();
 
-  useEffect(() => {
-    isTokenExpired(router);
-  }, [router]);
+  // useEffect(() => {
+  //   isTokenExpired(router);
+  // }, [router]);
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>

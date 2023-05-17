@@ -19,10 +19,11 @@ datasource db {
 
 model User {
   id               Int       @id @default(autoincrement())
-  name             String
+  username         String
   sentMessages     Message[] @relation("sentMessages")
   receivedMessages Message[] @relation("receivedMessages")
- 
+  password         String
+  email            String
 }
 
 model Message {
@@ -32,5 +33,4 @@ model Message {
   receiver   User   @relation(name: "receivedMessages", fields: [receiverId], references: [id])
   senderId   Int
   receiverId Int
-
 }

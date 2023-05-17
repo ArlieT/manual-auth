@@ -1,19 +1,21 @@
 import prisma from "../../../lib/prisma"
 import { NextResponse } from 'next/server'
-
+import jwt from 'jsonwebtoken';
 export type UserType = {
   username: string,
   password: string,
   email: string
 }
 
-import jwt from "jsonwebtoken";
+
+
 export async function POST(req: Request) {
   const res: UserType = await req.json()
-  console.log('User req')
-  console.log(res)
+  console.log('body', res)
 
-  if (res.username || res.password) {
+
+
+  if (res.username && res.password) {
 
     const useraccount = await prisma.user.findFirst({
       where: {
@@ -21,12 +23,19 @@ export async function POST(req: Request) {
         password: res.password,
       }
     })
-
-    console.log("Found")
-    console.log({ useraccount })
+    console.log('FOUND: ', useraccount)
 
     if (useraccount) {
-      const token = jwt.sign({ username: useraccount.username }, "your-secret-key", { expiresIn: "1h" });
+      const secretKey = 'secret'; // Replace with your own secret key
+
+      const payload = {
+        username: useraccount.username,
+      };
+
+      const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+      console.log('token:', token);
+
+      // const token = jwt.sign({ username: useraccount.username }, "your-secret-key", { expiresIn: "1h" });
       return NextResponse.json({ msg: "Accepted", token });
     }
     return NextResponse.json("No account found")

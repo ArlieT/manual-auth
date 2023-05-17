@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
-import  {useForm}  from "react-hook-form";
-import { login } from "../../../service/user.auth";
+import * as React from "react";
+import { useForm } from "react-hook-form";
+import { login } from "../../../../service/user.auth";
 import { useRouter } from "next/navigation";
 export default function Login() {
+  const [isLoggingIn, setIsLogginIn] = React.useState(false);
   const router = useRouter();
   const {
     register,
@@ -12,8 +13,9 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (data: any) => {
+    setIsLogginIn(true);
     await login(data.username, data.password).then((res) => {
-      console.log("on submit ", res);
+      console.log("login response ", res);
       if (res.data.msg === "Accepted") {
         router.push("/");
       } else {
@@ -52,7 +54,9 @@ export default function Login() {
           {errors.exampleRequired && <span>This field is required</span>}
         </div>
 
-        <button className="border-white border rounded py-2">submit</button>
+        <button className="border-white border rounded py-2">
+          {isLoggingIn ? "Loading..." : "Login"}
+        </button>
       </form>
     </main>
   );

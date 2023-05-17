@@ -1,3 +1,4 @@
+import { User } from "@prisma/client"
 import api from "./api"
 import { removeItemToken, setItemToken } from "./tokenServices"
 import router from 'next/navigation'
@@ -21,6 +22,15 @@ export const login = async (username: string, password: string) => {
         console.log('error');
         return Promise.reject('Missing username or password');
     }
+}
+
+export const signUp = async (username: string, password: string) => {
+
+    return await api.post('/api/register', {
+        username: username,
+        password: password
+    }).then((res) => { return res })
+
 }
 
 
