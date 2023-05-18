@@ -18,10 +18,11 @@ export default function Login() {
     await login(data.username, data.password).then((res) => {
       console.log("login response ", res);
       if (res.data.msg === "Accepted") {
-        setItemToken(res.data.token)
+        setItemToken(res.data.token);
         router.push("/");
       } else {
         alert("Wrong credentials. please try again.");
+        setIsLogginIn(false);
       }
     });
   };
