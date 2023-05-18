@@ -1,39 +1,63 @@
 "use client";
 import * as React from "react";
-import { getUser } from "../../service/tokenServices";
+import { getUser, isSessionExpired } from "../../service/tokenServices";
 import { useRouter } from "next/navigation";
+import { JwtPayload } from "jsonwebtoken";
+import { getSecuredData, postMessage } from "../../service/apiRequest";
+import { useForm } from "react-hook-form";
+
+type user = {
+  decoded: string | JwtPayload | null;
+};
 
 function Home() {
-  const [user,setuser]= React.useState('')
+
+  const [user, setuser] = React.useState<user>();
   const router = useRouter();
   const session = getUser();
 
+  const sessionTime: boolean = isSessionExpired();
 
-  console.log({session})
-  
-  // setuser(session.decoded.username);
-  const time = Math.floor(Date.now() / 1000);
-  const inMilli = time * 1000; // Convert to milliseconds
-  const verifyDate = new Date(inMilli);
-  const now = verifyDate.toLocaleString();
+  React.useEffect(() => {
+    if (sessionTime) {
+      router.push("/login");
+    } else {
+      setuser(session);
+    }
+  }, []);
 
-  
-  if(session){
-    const expirationDate = new Date(session.formattedExpirationDate)
-    const currenDate = new Date(now)
+  React.useEffect(() => {
+    console.log({ user });
+  }, [user]);
 
-    console.log({expirationDate})
-    console.log({currenDate})
-  if (currenDate >= expirationDate) {
-    console.log('expired')
-    router.push("/login");
-  }else{
-    console.log('sessoin not expired')
+  // const getSecured = async () => {
+  //   const res = await getSecuredData();
+
+  //   console.log({ res });
+  // };
+
+  // React.useEffect(() => {
+  //   getSecured();
+  // }, []);
+
+  const {register,handleSubmit,}=useForm()
+
+
+  const onSubmitMessage = (data:any)=>{
+    console.log(data)
+    postMessage(data.message,user?.decoded?.username)
   }
-}
+
+  return <div>
+    {user?.decoded?.username}
 
 
-  return <div>Home</div>;
+    <form onSubmit={handleSubmit(onSubmitMessage)}>
+      <label htmlFor="">Message</label>
+      <input type="text" {...register('message')} />
+      <button>submit</button>
+    </form>
+  </div>;
 }
 
 export default Home;

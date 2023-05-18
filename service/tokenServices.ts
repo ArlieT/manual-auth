@@ -1,3 +1,4 @@
+'use client'
 import { logout } from "./user.auth";
 import jwt from "jsonwebtoken";
 
@@ -15,14 +16,13 @@ export const getItemToken = () => {
   return localStorage.getItem("token");
 };
 
-const secretKey = "your_secret_key_here";
 
 export const getUser = () => {
-  const userToken = localStorage.getItem("token");
+  const userToken = getItemToken();
   if (userToken) {
     const decoded = jwt.decode(userToken);
 
-    // console.log({ decoded });
+    console.log({ decoded });
     const expirationDateInSeconds = decoded?.exp;
     const expirationDateInMillis = expirationDateInSeconds * 1000; // Convert to milliseconds
 
@@ -54,3 +54,23 @@ export const isTokenExpired = (router: any) => {
     router.push("/login");
   }
 };
+
+
+export const isSessionExpired = ()=>{
+  const time = Math.floor(Date.now() / 1000);
+  const inMilli = time * 1000; // Convert to milliseconds
+  const verifyDate = new Date(inMilli);
+  const now = verifyDate.toLocaleString();
+
+
+  const session = getUser()
+  if(session){
+  const expirationDateTime =new Date(session?.formattedExpirationDate)
+  const currenDateTime = new Date(now)
+
+  if(currenDateTime >= expirationDateTime)
+    return true
+  }
+  return false
+
+}

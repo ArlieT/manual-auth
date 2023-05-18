@@ -17,16 +17,17 @@ export async function GET(req: Request) {
         const token = authHeader.split(' ')[1]
         console.log({ token })
         jwt.verify(token, secretKey, (err, decoded) => {
-            if (err) {
-                //verification failed
-                return NextResponse.json(err, {
-                    status: 400
-                })
-            }
-
+            // if (err !== null) {
+            //     //verification failed
+            //     return NextResponse.json(err, {
+            //         status: 400
+            //     })
+            // }
+            console.log({err})
             console.log({ decoded })
-            return NextResponse.json(decoded)
+            return NextResponse.json({decoded})
         })
 
     }
+    return NextResponse.json({msg:'Need Authorization'})
 }
