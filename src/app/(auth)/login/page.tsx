@@ -3,6 +3,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../../../../service/user.auth";
 import { useRouter } from "next/navigation";
+import { setItemToken } from "../../../../service/tokenServices";
 export default function Login() {
   const [isLoggingIn, setIsLogginIn] = React.useState(false);
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Login() {
     await login(data.username, data.password).then((res) => {
       console.log("login response ", res);
       if (res.data.msg === "Accepted") {
+        setItemToken(res.data.token)
         router.push("/");
       } else {
         alert("Wrong credentials. please try again.");

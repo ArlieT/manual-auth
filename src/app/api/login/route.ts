@@ -32,7 +32,7 @@ export async function POST(req: Request) {
         username: useraccount.username,
       };
 
-      const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+      const token = jwt.sign(payload, secretKey, { expiresIn: '1m' });
       console.log('token:', token);
 
       // const token = jwt.sign({ username: useraccount.username }, "your-secret-key", { expiresIn: "1h" });

@@ -13,7 +13,6 @@ export const login = async (username: string, password: string) => {
             username: username,
             password: password
         }).then((res) => {
-            console.log('res: login', res)
             setItemToken(res.data.token);
 
             return res
