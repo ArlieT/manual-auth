@@ -8,6 +8,7 @@ import {Nunito} from 'next/font/google'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import NavBar from "@/components/NavBar";
+import Modal from '@/components/modals/Modal';
 
 
 const nonito = Nunito({ subsets: ["latin"] });
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className={nonito.className}>
         {/* mui */}
         <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Modal isOpen={true} title='Log in or sign up' body={'Welcome to Airbnb'}  actionLabel='Continue' secondaryLabel='SecondaryActionLabel'/>
           <NavBar/>
         {children}
         </LocalizationProvider>
