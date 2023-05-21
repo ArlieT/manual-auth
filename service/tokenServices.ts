@@ -86,7 +86,7 @@ export const isTokenExpired = (router: any) => {
 };
 
 
-export const isSessionExpired = () => {
+export const isSessionExpired = ():boolean => {
   const time = Math.floor(Date.now() / 1000);
   const inMilli = time * 1000; // Convert to milliseconds
   const verifyDate = new Date(inMilli);
@@ -96,17 +96,17 @@ export const isSessionExpired = () => {
   const session = getUser()
   if (session) {
 
-    let expirationDate: Date | undefined
+    let expirationDate: Date
     if (session.formattedExpirationDate) {
       expirationDate = new Date(session.formattedExpirationDate)
-      const expirationDateTime = new Date(expirationDate)
 
       const currenDateTime = new Date(now)
-      if (currenDateTime >= expirationDateTime)
-        return true
+      if (currenDateTime >= expirationDate)
+          return true
     }
     return false
   }
+  else return true
 
 
 
