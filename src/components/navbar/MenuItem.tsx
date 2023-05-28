@@ -1,18 +1,26 @@
-'use client'
-import React from 'react'
+import React from 'react';
 
-interface MenuItemProps{
-    onclick:()=>void;
-    label:string
+interface User {
+  email: string;
+  image: string;
+  name: string;
 }
 
-function MenuItem({label, onclick}:MenuItemProps) {
+interface MenuItemProps {
+  onclick: () => void;
+  label: string;
+  user:any
+}
+
+
+
+function MenuItem({ label, user = null, onclick }: MenuItemProps) {
   return (
     <div onClick={onclick} className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'>
-        {label}
-
+      <p className='inline'>{user?.user.email}</p>
+      {label}
     </div>
-  )
+  );
 }
 
-export default MenuItem
+export default MenuItem;

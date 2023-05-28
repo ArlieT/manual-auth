@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 type User = {
   username: string;
   password: string;
+  email:string
 };
 
 export default function Register() {
@@ -17,7 +18,7 @@ export default function Register() {
   } = useForm<User>();
 
   const onSubmit = (data: User) => {
-    signUp(data.username, data.password).then((res) => {
+    signUp(data.username, data.password,data.email).then((res) => {
       if (res.data.msg === "Successful") {
         router.push("/login");
       }
@@ -48,6 +49,16 @@ export default function Register() {
             {...register("password", { required: true })}
             type="password"
             id="password"
+            className="bg-blue-950/30 px-2 py-0.5 border focus:outline-none"
+          />
+          {/* errors will return when field validation fails  */}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="email">email</label>
+          <input
+            {...register("email", { required: true })}
+            type="email"
+            id="email"
             className="bg-blue-950/30 px-2 py-0.5 border focus:outline-none"
           />
           {/* errors will return when field validation fails  */}

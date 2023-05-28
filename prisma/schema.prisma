@@ -20,17 +20,17 @@ datasource db {
 model User {
   id               Int       @id @default(autoincrement())
   username         String
-  sentMessages     Message[] @relation("sentMessages")
-  receivedMessages Message[] @relation("receivedMessages")
+  // sentMessages     Message[] @relation("sentMessages")
+  // receivedMessages Message[] @relation("receivedMessages")
   password         String
   email            String
 }
 
-model Message {
-  id         Int    @id
-  text       String
-  sender     User   @relation(name: "sentMessages", fields: [senderId], references: [id])
-  receiver   User   @relation(name: "receivedMessages", fields: [receiverId], references: [id])
-  senderId   Int
-  receiverId Int
-}
+// model Message {
+//   id         Int    @id
+//   text       String
+//   sender     User   @relation(name: "sentMessages", fields: [senderId], references: [id])
+//   receiver   User   @relation(name: "receivedMessages", fields: [receiverId], references: [id])
+//   senderId   Int
+//   receiverId Int
+// }

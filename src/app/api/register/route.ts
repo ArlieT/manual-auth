@@ -15,7 +15,7 @@ export async function POST(req: Request) {
                 data: {
                     username: data.username,
                     password: data.password,
-                    email: ""
+                    email: data.email
                 }
             });
             if (registerUser) {

@@ -12,38 +12,41 @@ import Button from '@mui/material/Button';
 import '@fontsource/roboto/700.css';
 import { DatePicker } from "@mui/x-date-pickers";
 import { el } from "date-fns/locale";
+import { LoginButton } from "@/components/buttons/buttons.components";
 
-
+import { useSession } from "next-auth/react";
 
 function Home() {
   const [user, setuser] = React.useState<any>();
+  const {data} = useSession();
+
   const router = useRouter();
-  /* get user from decoded token */
-  const session = getUser();
+  /* get user from decoded token manual */
+  // const session = getUser();
 
-  const checksSession = ()=>{
-    const sessionExpired: boolean = isSessionExpired();
-    if (sessionExpired) {
-      console.log({sessionExpired})
-      router.push("/login");
-    } else {
-      setuser(session);
-    }
-  }
+  // const checksSession = ()=>{
+  //   const sessionExpired: boolean = isSessionExpired();
+  //   if (sessionExpired) {
+  //     console.log({sessionExpired})
+  //     router.push("/login");
+  //   } else {
+  //     setuser(session);
+  //   }
+  // }
 
-  React.useEffect(() => {
-    console.log({ user });
-    checksSession()
-  }, []);
+  // React.useEffect(() => {
+  //   console.log({ user });
+  //   checksSession()
+  // }, []);
  
 
-  window.addEventListener("focus", handleWindowFocus);
+  // window.addEventListener("focus", handleWindowFocus);
   
   // Function to handle window focus event // check sesesion
-  function handleWindowFocus() {
-    checksSession()
-    console.log("Page is active");
-  }
+  // function handleWindowFocus() {
+  //   checksSession()
+  //   console.log("Page is active");
+  // }
 
   // const getSecured = async () => {
   //   const res = await getSecuredData();
@@ -61,12 +64,15 @@ function Home() {
 
 
 
+React.useEffect(()=>{
 
+  console.log("session: ",data) 
+},[data])
 
 
   return (
     <div className="text-black bg-white h-full">
-    
+      {/* <LoginButton/> */}
     </div>
   );
 }
@@ -74,8 +80,3 @@ function Home() {
 export default Home;
 
   
-//   window.addEventListener("blur", handleWindowBlur);
-// // Function to handle window blur event
-// function handleWindowBlur() {
-//   console.log("Page is inactive");
-// }

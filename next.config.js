@@ -4,6 +4,9 @@ const nextConfig = {
         baseURL: 'http://localhost/',
         // baseURL: 'https://fruitdev.xyz'
     },
+    images:{
+        domains:['lh3.googleusercontent.com']
+    }
 }
 
 module.exports = nextConfig

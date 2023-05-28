@@ -1,10 +1,15 @@
+'use client'
+import { useEffect } from "react";
 import Container from "./Container"
 import Logo from "./navbar/Logo"
 import Search from "./navbar/Search"
 import UserMenu from "./navbar/UserMenu"
+import { useSession } from "next-auth/react";
 
 
 function NavBar() {
+
+  
   return (
     <nav className="w-full">
         <div className="w-full py-4 border-b-[1px]">

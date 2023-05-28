@@ -1,8 +1,8 @@
 import { IconType } from "react-icons/lib";
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 interface ButtonProps{
     label:string;
-    onClick: (e:React.MouseEvent<HTMLButtonElement>)=>void;
+    onClick?:()=>void;
     disabled?:boolean;
     outline?:boolean;
     small?: boolean;

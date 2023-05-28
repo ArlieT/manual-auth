@@ -11,7 +11,7 @@ export const login = async (username: string, password: string) => {
     if (username && password) {
         return await api.post('api/login', {
             username: username,
-            password: password
+            password: password,
         }).then((res) => {
             setItemToken(res.data.token);
 
@@ -23,11 +23,13 @@ export const login = async (username: string, password: string) => {
     }
 }
 
-export const signUp = async (username: string, password: string) => {
+export const signUp = async (username: string, password: string,email:string) => {
 
     return await api.post('/api/register', {
         username: username,
-        password: password
+        password: password,
+        email: email
+
     }).then((res) => { return res })
 
 }

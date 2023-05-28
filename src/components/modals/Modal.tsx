@@ -1,15 +1,17 @@
+'use client'
 import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-
+import { signIn, useSession } from 'next-auth/react';
+console.log({status})
 import Button from "../Button";
 interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
   onSubmit: () => void;
   title?: string;
-  body?: React.ReactElement;
+  body?: string;
   footer?: React.ReactElement;
   actionLabel: string;
   disabled?: boolean;
@@ -70,15 +72,34 @@ export default function Modal({
 
 
   /* input */
-  const countrySelect = document.getElementById('country-select');
-  const phoneInput = document.getElementById('phone-input');
+  const countrySelect = document.getElementById('country-select') as HTMLInputElement;
+  const phoneInput= document.getElementById('phone-input') as HTMLInputElement;
 
   phoneInput?.addEventListener('focus', () => {
     phoneInput.value = countrySelect?.value + " ";
   });
 
+
+const {data:session,status} = useSession()
+
+
+useEffect(() => {
+  console.log({status})
+
+  setShowModal(status == "authenticated"? false : true ) 
+
+
+
+}, [status])
+
+const handleSignIn = () => {
+  signIn("google", { callbackUrl: "http://localhost:3000" });
+};
+
+
   return (
-    <div
+    <>
+    {showModal ?(<> <div
       className="
       justify-center 
       items-center 
@@ -166,12 +187,15 @@ export default function Modal({
               <Button
                 outline={true}
                 label="Continue with Google"
-                icon={<FaFacebook size={28} />}
+                icon={<FaFacebook size={28}
+                onClick={(event) => signIn()}
+                />}
               />
               <Button
                 outline={true}
                 label="Continue with Google"
                 icon={<FcGoogle size={28} />}
+                onClick={handleSignIn}
               />
             </div>
             <div className="flex  items-center gap-2">
@@ -204,7 +228,8 @@ export default function Modal({
                   <option value="+91">Pakistan (+92)</option>
                 </select>
                 <input
-                id="phone-input"
+                   id="phone-input"
+
                   type="tel"
                   className="py-2 px-3 focus:outline-none h-full"
                   placeholder="Phone number"
@@ -214,14 +239,14 @@ export default function Modal({
                 className="flex flex-row items-center gap-4 w-full
               "
               >
-                {secondaryAction && secondaryLabel && (
+                {/* {secondaryAction && secondaryLabel && (
                   <Button
                     disabled={disabled}
                     label={secondaryLabel}
-                    onClick={handleSecondaryAction}
+                    onClick={signIn}
                     outline
                   />
-                )}
+                )} */}
                 <Button
                   disabled={disabled}
                   label={actionLabel}
@@ -234,6 +259,7 @@ export default function Modal({
           </div>
         </div>
       </div>
-    </div>
+    </div></>) : (<></>)}
+    </>
   );
 }
