@@ -39,7 +39,7 @@ export default function RootLayout({
         {/* mui */}
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <SessionWrapper>
-          <Modal isOpen={false} title='Log in or sign up' body={'Welcome to Airbnb'}  actionLabel='Continue' secondaryLabel='Google'/>
+          <Modal onClose={()=>{}} onSubmit={()=>{}} disabled={false} footer='' secondaryAction={()=>{}} isOpen={false} title='Log in or sign up' body={'Welcome to Airbnb'}  actionLabel='Continue' secondaryLabel='Google'/>
           <NavBar/>
            {children}
            </SessionWrapper>

@@ -53,7 +53,7 @@ export default function UserMenu() {
                     <Avatar/>
                    }
                    
-                    <p className={`bg-gray-200 rounded-md font-semibold px-3 py-1 shadow shadow-gray-300/80 absolute scale-0 ${!isOpen ? "group-hover:scale-100" :""} transition-all -left-32 -bottom-[42px] `}> {session?.user?.email}</p>
+                   {session && <p className={`bg-gray-200 rounded-md font-semibold px-3 py-1 shadow shadow-gray-300/80 absolute scale-0 ${!isOpen ? "group-hover:scale-100" :""} transition-all -left-32 -bottom-[42px] `}> {session?.user?.email}</p>}
                 </div>
             </div>
             {/* dropdown */}
@@ -62,7 +62,10 @@ export default function UserMenu() {
                   <div className='flex flex-col  cursor-pointer'>
                     <>
                     <MenuItem user={null} label='Profile' onclick={gotoProfile}/>
-                    <MenuItem user={null} label='Logout' onclick={signOut}/>
+                    
+                    {session ? <MenuItem user={null} label='Logout' onclick={signOut}/> 
+                    :<MenuItem user={null} label='Login' onclick={signIn}/>
+                    }
 
                     </>
                   </div>
