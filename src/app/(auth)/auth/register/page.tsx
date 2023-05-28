@@ -1,6 +1,6 @@
 "use client";
 import { useForm, Resolver, SubmitHandler } from "react-hook-form";
-import { login, signUp } from "../../../../service/user.auth";
+import { login, signUp } from "../../../../../service/user.auth";
 import { useRouter } from "next/navigation";
 
 type User = {

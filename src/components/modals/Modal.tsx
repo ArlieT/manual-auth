@@ -96,6 +96,11 @@ const handleSignIn = () => {
   signIn("google", { callbackUrl: "http://localhost:3000" });
 };
 
+const sign = () => {
+  console.log('clicked')
+  signIn("credentials",);
+};
+
 
   return (
     <>
@@ -188,7 +193,7 @@ const handleSignIn = () => {
                 outline={true}
                 label="Continue with Google"
                 icon={<FaFacebook size={28}
-                onClick={(event) => signIn()}
+                onClick={sign}
                 />}
               />
               <Button

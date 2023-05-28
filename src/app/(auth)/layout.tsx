@@ -1,5 +1,6 @@
 import {Nunito} from 'next/font/google'
 import '../../app/globals.css'
+import SessionWrapper from '../Sessionwrapper';
 
 
 
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nonito.className}>
+      <SessionWrapper>
+        
         {children}
+        </SessionWrapper>
         </body>
     </html>
   );
