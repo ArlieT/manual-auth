@@ -3,9 +3,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
+import { BsFillKeyFill } from "react-icons/bs";
+
 import { signIn, useSession } from 'next-auth/react';
 console.log({status})
 import Button from "../Button";
+import Signin from "@/app/(auth)/auth/signin/page";
 interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
@@ -96,9 +99,8 @@ const handleSignIn = () => {
   signIn("google", { callbackUrl: "http://localhost:3000" });
 };
 
-const sign = () => {
-  console.log('clicked')
-  signIn("credentials",);
+const signInwithCredentials = () => {
+  signIn();
 };
 
 
@@ -191,9 +193,9 @@ const sign = () => {
               <span className="font-bold text-lg"> {body}</span>
               <Button
                 outline={true}
-                label="Continue with Google"
-                icon={<FaFacebook size={28}
-                onClick={sign}
+                label="Continue with credentials"
+                icon={<BsFillKeyFill size={28}
+                onClick={signInwithCredentials}
                 />}
               />
               <Button

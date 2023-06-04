@@ -42,15 +42,16 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (findUser) {
-          const user: User = {
-            id: findUser.id.toString(),
-            user: findUser.username,
-            // password: findUser.password,
-            email: findUser.email,
-          };
-          console.log('-----')
-          console.log({user})
-          return user as any;
+          // const user: User = {
+          //   id: findUser.id.toString(),
+          //   user: findUser.username,
+          //   // password: findUser.password,
+          //   email: findUser.email,
+          return findUser as any
+          
+          // console.log('-----')
+          // console.log({user})
+          // return user as any;
         } else {
           return null;
         }
@@ -67,16 +68,15 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
     error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request', // (used for check email message)
-    newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+    newUser: '/' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
-  callbacks: {
-    async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url
-      return baseUrl
-    }
-  }
+  // callbacks: {
+  //   async redirect({ url, baseUrl }) {
+  //     // Allows relative callback URLs
+  //     if (url.startsWith("/")) return `${baseUrl}${url}`
+  //     // Allows callback URLs on the same origin
+  //     else if (new URL(url).origin === baseUrl) return url
+  //     return baseUrl
+  //   }
+  // }
 };

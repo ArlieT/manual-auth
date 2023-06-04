@@ -1,45 +1,78 @@
-'use client'
-import { signIn } from 'next-auth/react';
-import React from 'react'
-import { useForm ,SubmitHandler } from 'react-hook-form'
+"use client";
+import { signIn } from "next-auth/react";
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { AiFillEyeInvisible, AiOutlineEyeInvisible } from "react-icons/ai";
 export default function Signin() {
-
-  interface userAuth{
-    username:string
-    password:string
+  interface userAuth {
+    username: string;
+    password: string;
   }
 
-  const {handleSubmit,register,setError,watch} = useForm<userAuth>();
+  const { handleSubmit, register, setError, watch,formState: { errors } } = useForm<userAuth>();
   const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
-  
-  const onSubmit = async (data:userAuth)=>{
+
+  // const onSubmit = async (data:userAuth)=>{
+  //   console.log('on submit" ')
+  //   console.log({data})
+  //   //   signIn('credential',{
+  //   //   username:data.username,
+  //   //   password:data.password,
+  //   //   redirect:false
+
+  //   // })
+
+  //   // console.log(result)
+  // }
+
+  const [seePass, setSeePass] = useState('password')
+  const [isSubmitting, setIsSubmtting] = useState(false)
+
+  const onSubmit = async (data:userAuth) => {
+    setIsSubmtting(true)
+    const result = await signIn("credentials", {
+      username: data.username,
+      password: data.password,
+      redirect: true,
+      callbackUrl: "/"
+    });
     console.log({data})
-      signIn('credential',{
-      username:data.username,
-      password:data.password,
-      redirect:false
- 
-    })
-
-    // console.log(result)
-  }
-
+  };
 
   return (
-    <main className='text-black'>
-  <form onSubmit={handleSubmit(onSubmit)} 
-  className='flex flex-col w-2/4 space-y-5 bg-blue-400 rounded mx-auto'>
-      <label htmlFor="">{watchAllFields.username}</label>
-    <input type="text" {...register('username')} />
-    <label htmlFor="">{watchAllFields.password}</label>
+    <main className="h-screen flex flex-cols items-center justify-center text-black">
+
+      {/* form con */}
+      <div className="min-w-[50%] flex flex-col items-center border py-5 rounded">
+        <h1 className="font-bold text-2xl my-2">Sign in with credentials</h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col w-2/4 space-y-5  rounded mx-auto"
+      >
+        {errors.username && <p>{errors.username.message}</p>}
+        <div className=" flex justify-between items-center px-4 py-2 border">
+        <input type="text" {...register("username",{ maxLength: 16,required:"This field is require",})}  className="w-full focus:outline-none"/>
+        </div>
 
 
-    <input type="password" {...register('password')} />
 
-    <button>submit</button>
-  </form>
-  </main>
-  )
+        {errors.password && <p>{errors.password.message}</p>}
+        <div className=" flex justify-between items-center px-4 py-2 border">
+        <input type={seePass} {...register("password", {min:8,maxLength:20,required:"Password is requuired"})} className="w-[85%] max-w-[85%] focus:outline-none "/>
+          {seePass === 'password' ? 
+          <AiFillEyeInvisible onClick={()=>setSeePass('text')}/>
+           :
+          <AiOutlineEyeInvisible onClick={()=>setSeePass('password')} className="inline-flex"/>
+           }
+        </div>
+
+        <button className="w-full text-lg font-bold  border border-blue-500 hover:bg-blue-500 hover:text-white duration-200 py-2">
+          {isSubmitting ? 'Submitting...' : "Submit"}
+        </button>
+      </form>
+      </div>
+    </main>
+  );
 }
 // "use client";
 

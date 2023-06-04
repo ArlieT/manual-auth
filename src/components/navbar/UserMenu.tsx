@@ -40,6 +40,8 @@ export default function UserMenu() {
     router.push('/profile')
   }
 
+
+
   return (
     <div className='relative '>
         <div className='flex flex-row items-center gap-3'>
