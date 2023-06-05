@@ -15,6 +15,7 @@ import { el } from "date-fns/locale";
 import { LoginButton } from "@/components/buttons/buttons.components";
 
 import { useSession } from "next-auth/react";
+import CategoryNav from "@/components/CategoryNav";
 
 function Home() {
   const [user, setuser] = React.useState<any>();
@@ -69,11 +70,26 @@ React.useEffect(()=>{
   console.log("session: ",data) 
 },[data])
 
+const [initialPlace,setInitialPlace] =React.useState(false)
 
+window.onscroll = function() {
+  var distanceScrolled = document.documentElement.scrollTop;
+  console.log('Scrolled: ' + distanceScrolled);
+  if(distanceScrolled>1){
+    setInitialPlace(false)
+  }else{
+    setInitialPlace(true)
+    
+  }
+}
   return (
-    <div className="text-black bg-white h-full">
-      {/* <LoginButton/> */}
-    </div>
+    <main className="relative flex flex-col space-y-5 text-black bg-white h-full px-10">
+      <CategoryNav initialPlace={initialPlace}/>
+      <div className="border p-5  rounded-xl">
+        <h2>Display total price</h2>
+      </div>
+      <div className="h-screen border rounded"></div>
+    </main>
   );
 }
 
