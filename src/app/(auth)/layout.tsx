@@ -24,7 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={nonito.className}>
       <SessionWrapper>
-        
         {children}
         </SessionWrapper>
         </body>

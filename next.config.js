@@ -5,7 +5,7 @@ const nextConfig = {
         // baseURL: 'https://fruitdev.xyz'
     },
     images:{
-        domains:['lh3.googleusercontent.com']
+        domains:['lh3.googleusercontent.com','cdn.shopify.com']
     }
 }
 

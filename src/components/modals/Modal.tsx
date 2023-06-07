@@ -106,14 +106,9 @@ const signInwithCredentials = () => {
 
   return (
     <>
-    {showModal ?(<> <div
-      className="
-      justify-center 
-      items-center 
-      flex 
-      overflow-x-hidden 
-      overflow-y-auto 
-      fixed 
+    {showModal ?(<> 
+    <div
+      className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed 
       inset-0 
       z-50 
       outline-none 
@@ -121,6 +116,7 @@ const signInwithCredentials = () => {
       bg-neutral-800/70
     "
     >
+
       <div
         className="
       relative 
@@ -135,7 +131,7 @@ const signInwithCredentials = () => {
       md:h-auto
       "
       >
-        {/*content*/}
+        {/*container*/}
         <div
           className={`
         translate

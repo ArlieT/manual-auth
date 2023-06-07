@@ -6,7 +6,7 @@ import { isTokenExpired } from "../../../service/tokenServices";
 import {Nunito} from 'next/font/google'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navbar/NavBar";
 import Modal from '@/components/modals/Modal';
 import SessionWrapper from '../Sessionwrapper';
 

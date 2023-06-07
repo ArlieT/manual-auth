@@ -20,7 +20,7 @@ export default function Register() {
   const onSubmit = (data: User) => {
     signUp(data.username, data.password,data.email).then((res) => {
       if (res.data.msg === "Successful") {
-        router.push("/login");
+        router.push("/auth/signin");
       }
     });
   };

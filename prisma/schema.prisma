@@ -17,13 +17,25 @@ datasource db {
 //   password String
 // }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
-  id               Int       @id @default(autoincrement())
-  username         String
-  // sentMessages     Message[] @relation("sentMessages")
-  // receivedMessages Message[] @relation("receivedMessages")
-  password         String
-  email            String
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+  email    String
+  role     Role   @default(USER)
+}
+
+model Product {
+  id          String @id
+  description String
+  name        String
+  price       Int
+  image       String
 }
 
 // model Message {

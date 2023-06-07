@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
+    
     GoogleProvider({
       clientId: GOOGLE_ID,
       clientSecret: GOOGLE_SECRET ,
