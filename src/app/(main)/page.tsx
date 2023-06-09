@@ -4,10 +4,7 @@ import { getUser, isSessionExpired } from "../../../service/tokenServices";
 import {  useRouter } from "next/navigation";
 import { JwtPayload } from "jsonwebtoken";
 import { getSecuredData, postMessage } from "../../../service/apiRequest";
-import Image from 'next/image'
-import Link from 'next/link'
 import { useForm } from "react-hook-form";
-import Button from '@mui/material/Button';
 
 import '@fontsource/roboto/700.css';
 import { DatePicker } from "@mui/x-date-pickers";
@@ -98,7 +95,7 @@ const handleUpdate = () => {
 
   return (
     <main className="relative flex flex-col items-center justify-center space-y-5 text-black bg-white h-full ">
-      {/* <CategoryNav initialPlace={initialPlace}/> */}
+      <CategoryNav initialPlace={initialPlace}/>
       {name}
 
     <div> {lastName}</div>
