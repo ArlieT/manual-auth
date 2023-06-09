@@ -7,7 +7,7 @@ interface CategoryProps{
 export default function CategoryNav({initialPlace}:CategoryProps) {
     console.log({initialPlace})
   return (
-    <div className={`w flex justify-between sticky top-0 ${!initialPlace ? "shadow bg-white": ""}`}>
+    <div className={`flex justify-between sticky top-0 ${!initialPlace ? "shadow bg-white": ""}`}>
         <Category />
         <Category />
         <Category />

@@ -1,4 +1,5 @@
 "use client";
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {BiSearch} from 'react-icons/bi'
 export default function Search() {
   return (
@@ -23,6 +24,7 @@ export default function Search() {
         <div className='p-2 bg-rose-500 rounded-full text-white'><BiSearch size={18}/></div>
         </div>
       </div>
+
     </div>
   );
 }
