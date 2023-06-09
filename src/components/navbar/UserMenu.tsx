@@ -48,10 +48,10 @@ export default function UserMenu() {
             <div onClick={()=>{}} className=' md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'><AiOutlineShoppingCart size={24}/></div>
             <div onClick={toggleOpen} className='group p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'>
                 <AiOutlineMenu />
-                <div className='relative hidden md:block'>
+                <div className='relative hidden w-[30px] h-[30px] rounded-full overflow-hidden md:block'>
                     
-                    {session?.user?.image ?  <Image src={ session ? session?.user?.image : "/"}  alt={session && session?.user?.name ? session?.user?.name : ""} height={30} width={30} className='rounded-full
-                    '/> :
+                    {session?.user?.image ?  <Image src={ session ? session?.user?.image : "/"}  alt={session && session?.user?.name ? session?.user?.name : ""} height={100} width={100} 
+                    /> :
                     <Avatar/>
                    }
                    

@@ -8,8 +8,8 @@ type PropType = {
 };
 
 interface CategoryProps {
-  initialPlace: boolean;
-  options: string;
+  initialPlace?: boolean;
+  options?: string;
 }
 
 export default function CategoryNav({ initialPlace, options }: CategoryProps) {
