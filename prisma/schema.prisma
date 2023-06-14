@@ -29,6 +29,7 @@ model User {
   email    String
   role     Role      @default(USER)
   products Product[]
+  cartItems  CartItem[]
 }
 
 model Product {
@@ -38,7 +39,23 @@ model Product {
   name        String
   price       Int
   image       String
+  cartItem CartItem[]
 }
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Int
+}
+
+
+
+
+
+
 
 // model Message {
 //   id         Int    @id
