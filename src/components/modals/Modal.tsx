@@ -6,7 +6,6 @@ import { FaFacebook } from "react-icons/fa";
 import { BsFillKeyFill } from "react-icons/bs";
 
 import { signIn, useSession } from 'next-auth/react';
-console.log({status})
 import Button from "../Button";
 import Signin from "@/app/(auth)/auth/signin/page";
 interface ModalProps {

@@ -19,9 +19,9 @@ const { GOOGLE_ID = '', GOOGLE_SECRET = '' } = process.env;
 
 
 export const authOptions: NextAuthOptions = {
-  session: {
-    strategy: "jwt",
-  },
+  // session: {
+  //   strategy: "jwt",
+  // },
   providers: [
     CredentialsProvider({
       name: "Sign in",
@@ -39,19 +39,20 @@ export const authOptions: NextAuthOptions = {
             username: credentials?.username,
             password: credentials?.password,
           },
+          select: {
+            id: true,
+            username: true,
+            password: true,
+            email: true,
+            role: true,
+          },
         });
 
         if (findUser) {
-          // const user: User = {
-          //   id: findUser.id.toString(),
-          //   user: findUser.username,
-          //   // password: findUser.password,
-          //   email: findUser.email,
+          console.log({findUser})
+       
           return findUser as any
-          
-          // console.log('-----')
-          // console.log({user})
-          // return user as any;
+
         } else {
           return null;
         }

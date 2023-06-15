@@ -17,11 +17,11 @@ export default function Profile() {
   }, [status, router]);
 
   console.log("check if client/server");
-  const favDialog = document.getElementById('favDialog');
-  const showButton = document.getElementById('showDialog');
-  showButton?.addEventListener('click', () => {
-    favDialog?.showModal();
-  });
+  // const favDialog = document.getElementById('favDialog');
+  // const showButton = document.getElementById('showDialog');
+  // showButton?.addEventListener('click', () => {
+  //   favDialog?.showModal();
+  // });
   return (
     <main className="py-6">
       {/* card */}
@@ -30,7 +30,7 @@ export default function Profile() {
         <div className="space-x-4  shadow flex flex-col space-y-5 items-center rounded">
           <div className="bg-rose-500 h-20 w-full">
             <Image
-              src={session?.user?.image || ""}
+              src={session?.user?.image || "/"}
               alt={session?.user?.name || "User Profile"}
               width={80}
               height={80}

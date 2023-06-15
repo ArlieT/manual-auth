@@ -17,6 +17,8 @@ import useCountStore from "@/lib/State";
 import useUpdate from "@/lib/State";
 import { useState } from "react";
 import Product from "@/components/Product/page";
+import Cart from "./cart/page";
+import CartCom from "@/components/CartCom";
 
 function Home() {
   const [user, setuser] = React.useState<any>();
@@ -106,6 +108,12 @@ const handleUpdate = () => {
 
 
       <Product/>
+
+
+      <div>
+       <p className="block"> Cart</p>
+        <CartCom/>
+      </div>
     </main>
   );
 }
