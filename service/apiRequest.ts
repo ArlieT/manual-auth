@@ -39,11 +39,11 @@ export const getProducts = async () => {
 }
 
 export const postProducts = async () => {
-    const res = await api.post('/api/getProducts').then((res) => {
-        console.log('creating product products')
-        console.log(res)
+    const res = await api.post('/api/postProduct').then((res) => {
+        console.log('creating product products ', res)
         return res
     })
+    console.log({res})
     return res
 
 }
@@ -67,6 +67,16 @@ export const addToCart = async (params:IaddToCart)=>{
 export const getUserCart = async (id:any)=>{
 
     const res = await api.post('api/getUserCart',id).then((res)=>res)
+    console.log('axios ', res)
+    return res.data
+}
+
+
+/* get user details */
+
+export const getUserDetails = async (email:any)=>{
+
+    const res = await api.post('api/getUserId',email).then((res)=>res)
     console.log('axios ', res)
     return res.data
 }

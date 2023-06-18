@@ -8,6 +8,7 @@ import {useSession} from 'next-auth/react'
 import { signIn, signOut } from "next-auth/react";
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { cart } from '@/lib/State'
 interface User{
   session:{
   expiration:Date
@@ -39,13 +40,19 @@ export default function UserMenu() {
   const gotoProfile = ()=>{
     router.push('/profile')
   }
+  /* from zustand */
+  const {id,user,setCartItems,cartItems } = cart();
 
-
+  console.log('cart items in nav', cartItems)
+   
 
   return (
     <div className='relative  '>
         <div className='flex flex-row items-center gap-3'>
-            <div onClick={()=>{}} className=' md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'><AiOutlineShoppingCart size={24}/></div>
+          {/* cart */}
+            <div onClick={()=>{}} className=' md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
+              <AiOutlineShoppingCart size={24}/>
+              </div>
             <div onClick={toggleOpen} className='group p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'>
                 <AiOutlineMenu />
                 <div className='relative hidden w-[30px] h-[30px] rounded-full overflow-hidden md:block'>

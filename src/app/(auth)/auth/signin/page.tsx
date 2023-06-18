@@ -44,7 +44,7 @@ export default function Signin() {
 
       {/* form con */}
       <div className="min-w-[50%] flex flex-col items-center border py-5 rounded">
-        <h1 className="font-bold text-2xl my-2">Sign in with credentials</h1>
+        <h1 className="font-bold text-2xl my-2">Sign in with credentials\</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col w-2/4 space-y-5  rounded mx-auto"

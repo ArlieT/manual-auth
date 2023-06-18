@@ -33,8 +33,9 @@ model User {
 }
 
 model Product {
-  id          Int @id @default(autoincrement())
-  user        User   @relation(fields: [id], references: [id])
+  id Int @id @default(autoincrement())
+  userId          Int  
+  user        User   @relation(fields: [userId], references: [id])
   description String
   name        String
   price       Int
@@ -44,11 +45,11 @@ model Product {
 
 model CartItem {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   productId Int
-  quantity  Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity Int
 }
 
 

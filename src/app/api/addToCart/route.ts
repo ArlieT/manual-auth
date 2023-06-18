@@ -15,7 +15,7 @@ export async function POST(req:Request){
           email:userEmail
         }
       })
-        console.log({user})
+        console.log('email ',user)
       if (!user) {
         return NextResponse.json({ error: 'user not found' },{status:404});
       }

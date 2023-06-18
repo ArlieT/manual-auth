@@ -5,11 +5,28 @@ import { NextResponse } from "next/server"
 export async function POST(req:Request){
     const user = await req.json()
     
-    console.log('get cart ',user)
+    console.log('get cart ',user.cartItem)
     if(user){
-      const cart = await prisma.cartItem.findMany()
-    
+      const cart = await prisma.cartItem.findMany({
+        where:{
+          userId:user.cartItem.userId
+        },
+        include:{
+          product:{
+            select:{
+              description:true,
+              id:true,
+              image:true,
+              price:true,
+              user:true
+
+            }
+          }
+        }
+      })
+      
       if(cart){
+        console.log('user cart ',cart)
         return NextResponse.json({cart})
       }
     

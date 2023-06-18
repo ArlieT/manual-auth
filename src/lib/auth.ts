@@ -2,7 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google"
 import prisma from "./prisma";
-
+import { serialize, deserialize } from 'superjson';
 export interface User {
   id?: string;
   user?: string;
@@ -49,10 +49,18 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (findUser) {
-          console.log({findUser})
-       
-          return findUser as any
-
+          console.log({ findUser });
+        
+          const user = {
+            userId: findUser.id,
+            name: findUser.username,
+            email: findUser.email,
+            image: '', // Add the image property if available
+            role: findUser.role,
+            // Include any other necessary properties
+          };
+        
+          return user;
         } else {
           return null;
         }
@@ -68,17 +76,34 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: '/auth/signin',
-    signOut: '/auth/signout',
+    signOut: '/',
     // error: '/auth/error', // Error code passed in query string as ?error=
     newUser: '/' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
-  // callbacks: {
-  //   async redirect({ url, baseUrl }) {
-  //     // Allows relative callback URLs
-  //     if (url.startsWith("/")) return `${baseUrl}${url}`
-  //     // Allows callback URLs on the same origin
-  //     else if (new URL(url).origin === baseUrl) return url
-  //     return baseUrl
-  //   }
-  // }
+  
+  callbacks: {
+    async session({ session, token, user }) {
+      // Include the user ID in the session object
+      console.log({ session });
+      console.log({ token });
+      console.log({ user });
+  
+      if (user) {
+        session.user.id = user.id;
+        session.user.email = user.email;
+        session.user.name = user.name;
+        // Include any other necessary properties
+      }
+  
+      // Serialize the session object
+      const serializedSession = JSON.stringify(session);
+  
+      // Deserialize the session object
+      const deserializedSession = JSON.parse(serializedSession);
+  
+      return deserializedSession;
+    },
+  },
+  
+  
 };

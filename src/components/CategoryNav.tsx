@@ -16,23 +16,15 @@ export default function CategoryNav({ initialPlace, options }: CategoryProps) {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay()]);
 
   console.log({ initialPlace });
+
+  const numCategories = 10;
+
   return (
-    <div ref={emblaRef}
-      className={`embla p-[1.6rem]  flex w-full border border-red-500 justify-between sticky top-0 ${
-        !initialPlace ? "shadow bg-white" : ""
-      }`}
-    >
-      <div className="overflow-hidden flex touch-pan-y  ml-2" >
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
+    <div ref={emblaRef} className={`embla p-[1.6rem] flex w-full border border-red-500 justify-between sticky top-0 ${!initialPlace ? "shadow bg-white" : ""}`}>
+      <div className="overflow-hidden flex touch-pan-y ml-2">
+        {[...Array(numCategories)].map((_, index) => (
+          <Category key={index} categoryNumber={index + 1} />
+        ))}
       </div>
     </div>
   );

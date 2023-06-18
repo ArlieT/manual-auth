@@ -1,7 +1,7 @@
 // 'use client'
-import { AiOutlineLeft, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineLeft, AiOutlineMinusCircle, AiOutlinePlusCircle, AiOutlineShoppingCart } from "react-icons/ai";
 import * as React from "react";
-import { IProduct, IaddToCart, addToCart, getProducts, getUserCart, postProducts } from "../../../service/apiRequest";
+import { IProduct, IaddToCart, addToCart, getProducts, getUserCart, getUserDetails, postProducts } from "../../../service/apiRequest";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { cart } from "@/lib/State";
@@ -16,23 +16,8 @@ export default function Product() {
   const { data } = useSession();
   const userEmail = data?.user?.email;
 
-  const getAllProduct = async () => {
-    await getProducts().then(
-      (res) => {
-        console.log("sss");
-        if (res.data) {
-          setProducts(res.data.products);
-        } else {
-          alert(res.status);
-        }
-      },
-      (error) => alert(error)
-    );
-  };
 
-  React.useEffect(() => {
-    getAllProduct();
-  }, []);
+
 
   const handleAddToCart = async ({ productId, quantity, userEmail }: IaddToCart) => {
     let params = {
@@ -56,18 +41,37 @@ export default function Product() {
   };
 
 
-  const {id,user,setCartItems,cartItems } = cart();
 
-console.log('cart items', cartItems)
- 
+
   const postProduct = async ()=>{
     await postProducts().then((res)=>{
-      console.log('user cart ',res)
+      console.log('user product ',res)
       alert('creating successfull')
     },(error)=>{
       console.log(error,' getting cart ')
     })
   }
+
+  const getAllProduct = async () => {
+    await getProducts().then(
+      (res) => {
+        console.log("sss");
+        if (res.data) {
+          setProducts(res.data.products);
+        } else {
+          alert(res.status);
+        }
+      },
+      (error) => alert(error)
+    );
+  };
+
+  React.useEffect(() => {
+    getAllProduct();
+  }, []);
+
+
+
 
 
    const getUserCartItem = async ()=>{
@@ -84,76 +88,93 @@ console.log('cart items', cartItems)
 
 
   React.useEffect(()=>{
-    postProduct();
-  
-    },[])
-  
-
-  React.useEffect(()=>{
   getUserCartItem();
 
   },[userId])
 
+
+ React.useEffect(()=>{
+
+
+  const getUser = async() =>{
+    console.log({userEmail})
+
+    // if(!userEmail)return null
+  
+   await getUserDetails(userEmail).then((res)=>{
+      console.log('user details', res)
+    })
+     }
+
+  getUser();
+
+ },[userEmail])
+
   return (
-    <main className="flex  relative">
-      {products?.map((p) => {
-        return (
-          <div
-            key={p.id}
-            className=" flex  flex-col h-[22rem] w-[20rem] overflow-hidden  p-6 border rounded bg-white shadow  text-black"
-          >
-            <strong>{p?.name}</strong>
-
-            <div className="w-[100%] h-[150px] border mb-2 border-rose-500 overflow-hidden">
-              <Image
-                src={p.image}
-                alt={p.name}
-                height={100}
-                width={350}
-                className=""
-              />
-            </div>
-            <p>{p?.description}</p>
-
-
-            <div className="flex justify-between w-[90%] absolute bottom-4 ">
+    <main className="flex flex-col justify-center items-center w-full border">
+    <div className="flex flex-wrap items-center justify-center gap-4 w-full ">
+    {products?.map((p) => {
+      return (
+        <div
+          key={p.id}
+          className="flex flex-col w-[12rem] h-[22rem] md:w-[16rem] md:h-[20rem]  lg:w-[20rem] lg:h-[32rem] p-6 mb-8 border rounded bg-white shadow text-black"
+        >
+          <strong className="text-xl mb-2 text-center">{p?.name}</strong>
+  
+          <div className="w-full h-[20rem] mb-4 overflow-hidden">
+            <Image
+              src={p.image}
+              alt={p.name}
+              height={250}
+              width={350}
+              className=""
+            />
+          </div>
+          
+          <p className="mb-4 text-gray-600">{p?.description}</p>
+  
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
               <button
                 onClick={() =>
-                  handleAddToCart({
-                    productId: Number(p.id),
-                    quantity,
-                    userEmail: userEmail || ""
-                  })
+                  setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
                 }
-                className=" rounded bg-blue-500 text-white px-4 py-2 whitespace-nowrap"
+                className="px-4 py-2 rounded bg-blue-500 text-white"
               >
-                <AiOutlineShoppingCart className="inline align-middle" /> Add to
-                Cart
+                <AiOutlineMinusCircle />
               </button>
-
-              <div className="flex items-center border rounded">
-                <button  onClick={() =>
-                    setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
-                  } >
-                  <AiOutlineLeft /> 
-                </button>
-                <strong className="mx-2"> {quantity}</strong>
-                <button
-                 onClick={() => setQuantity((prev) => prev + 1)}
-                >
-                  <AiOutlineLeft className="rotate-180" />{" "}
-                </button>
-              </div>
+              <strong className="text-xl">{quantity}</strong>
+              <button
+                onClick={() => setQuantity((prev) => prev + 1)}
+                className="px-4 py-2 rounded bg-blue-500 text-white"
+              >
+                <AiOutlinePlusCircle />
+              </button>
             </div>
+  
+            <button
+              onClick={() =>
+                handleAddToCart({
+                  productId: Number(p.id),
+                  quantity,
+                  userEmail: userEmail || ""
+                })
+              }
+              className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
+            >
+              <AiOutlineShoppingCart className="inline align-middle" /> Add to Cart
+            </button>
           </div>
-        );
-      })}
-
-
-      <AiOutlineShoppingCart/>
-
-      {/*  */}
-     
-    </main>
+        </div>
+      );
+    })}
+    </div>
+  
+    <AiOutlineShoppingCart className="text-4xl" />
+    <button
+              onClick={postProduct}
+              className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
+            >add product</button>
+  </main>
   );
 }
