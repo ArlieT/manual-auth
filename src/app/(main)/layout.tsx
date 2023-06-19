@@ -8,6 +8,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import NavBar from "@/components/navbar/NavBar";
 import Modal from '@/components/modals/Modal';
 import SessionWrapper from '../Sessionwrapper';
+import CartModal from '@/components/modals/CartModal';
+import { cartModal } from '@/lib/State';
 
 
 
@@ -29,6 +31,8 @@ export default function RootLayout({
 
 
 
+  const { isShown,setCartModal} = cartModal();
+
   
   return (
     <html lang="en">
@@ -36,6 +40,8 @@ export default function RootLayout({
         {/* mui */}
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <SessionWrapper>
+
+         { isShown &&  <CartModal/>}
           <Modal onClose={()=>{}} onSubmit={()=>{}} disabled={false} footer='' secondaryAction={()=>{}} isOpen={false} title='Log in or sign up' body={'Welcome to Airbnb'}  actionLabel='Continue' secondaryLabel='Google'/>
           <NavBar/>
            {children}

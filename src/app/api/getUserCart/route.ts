@@ -14,6 +14,7 @@ export async function POST(req:Request){
         include:{
           product:{
             select:{
+              name:true,
               description:true,
               id:true,
               image:true,

@@ -16,7 +16,7 @@ export default function CartCom() {
           );
         })
       ) : (
-        <div>asdas</div>
+        <div></div>
       )}
     </div>
   );

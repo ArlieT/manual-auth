@@ -21,17 +21,35 @@ const useUpdate = create<State & Action>((set) => ({
     updateLastName: (lastName) => set(() => ({ lastName: lastName })),
   }))
 
+  export default useUpdate;
 
   
 
+  export type cart ={
+    id:number,
+    useriod:number,
+    productId:number
+    quantity: number
+    image:string
+    product:{
+      description:string
+      id:number
+      price:7000
+      user:any
+    }
+  }
 
-  export const cart = create((set) => ({
-    id: '',
-    user: '',
-    userId: '',
-    product: '',
-    productId: '',
-    quantity: 0,
+  interface cartItems {
+    cartItems: cart[];
+    setCartItems: (isTrue: boolean) => void;
+  }
+  export const cart = create<cartItems>((set) => ({
+    // id: '',
+    // user: '',
+    // userId: '',
+    // product: '',
+    // productId: '',
+    // quantity: 0,
     cartItems: [],
     setCartItems: (data:any) => set({ cartItems: data }),
   }));
@@ -39,6 +57,12 @@ const useUpdate = create<State & Action>((set) => ({
 
 
 
+  interface CartModal {
+    isShown: boolean;
+    setCartModal: (isTrue: boolean) => void;
+  }
+  export const cartModal = create<CartModal>((set) => ({
+    isShown: false,
+    setCartModal: (isTrue:boolean) => set({ isShown: isTrue }),
+  }));
 
-
-export default useUpdate;
