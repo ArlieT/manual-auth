@@ -2,10 +2,13 @@
   "name": "swr_axiots_aut",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+  
+   "scripts": {
+    "generate": "npx prisma generate",
+    "deploy": "npx prisma migrate deploy",
+    "dev": "npm run generate && nodemon --watch \"src/**\" --ext \"js,json\" --exec \"node src/index.js\"",
+    "build": "npm run generate",
+    "start": "npm run build && node build/index.js",
     "lint": "next lint"
   },
   "dependencies": {
