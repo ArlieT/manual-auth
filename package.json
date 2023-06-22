@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate"
-
   },
-
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -51,6 +49,6 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",
-    "prisma": "^4.14.0"
+    "prisma": "^4.16.0"
   }
 }
