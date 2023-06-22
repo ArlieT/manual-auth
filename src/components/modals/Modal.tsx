@@ -10,8 +10,8 @@ import Button from "../Button";
 import Signin from "@/app/(auth)/auth/signin/page";
 interface ModalProps {
   isOpen?: boolean;
-  onClose: () => void;
-  onSubmit: () => void;
+  onClose?: () => void;
+  onSubmit?: () => void;
   title?: string;
   body?: string;
   footer?: string;
@@ -46,7 +46,7 @@ export default function Modal({
     setShowModal(false);
 
     setTimeout(() => {
-      onClose();
+      // onClose();
     }, 3000);
   }, [disabled, onClose]);
 
@@ -54,7 +54,7 @@ export default function Modal({
     if (disabled) {
       return;
     }
-    onSubmit();
+    // onSubmit();
   }, [disabled, onSubmit]);
 
   const handleSecondaryAction = useCallback(() => {
@@ -69,7 +69,7 @@ export default function Modal({
       return;
     }
 
-    onSubmit();
+    // onSubmit();
   }, [onSubmit, disabled]);
 
   /* input */
@@ -84,6 +84,7 @@ export default function Modal({
   //   }
   // });
 
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     console.log({ status });
