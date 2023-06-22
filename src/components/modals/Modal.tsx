@@ -1,10 +1,10 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { BsFillKeyFill } from "react-icons/bs";
-
+import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import Button from "../Button";
 import Signin from "@/app/(auth)/auth/signin/page";
@@ -73,16 +73,17 @@ export default function Modal({
   }, [onSubmit, disabled]);
 
   /* input */
-  const countrySelect = document.getElementById(
-    "country-select"
-  ) as HTMLInputElement;
-  const phoneInput = document.getElementById("phone-input") as HTMLInputElement;
+  // const countrySelectRef = useRef<HTMLSelectElement | null>(null);
+  // const phoneInputRef = useRef<HTMLInputElement | null>(null);
 
-  phoneInput?.addEventListener("focus", () => {
-    phoneInput.value = countrySelect?.value + " ";
-  });
+  // getElementById("phone-input") as HTMLInputElement | null;
+  
+  // countrySelect?.addEventListener("change", () => {
+  //   if (countrySelect.value && phoneInput) {
+  //     phoneInput.value = countrySelect.value + " ";
+  //   }
+  // });
 
-  const { data: session, status } = useSession();
 
   useEffect(() => {
     console.log({ status });
@@ -97,7 +98,7 @@ export default function Modal({
   const signInwithCredentials = () => {
     signIn();
   };
-
+  const router = useRouter()
   return (
     <>
       {showModal ? (
@@ -204,7 +205,18 @@ export default function Modal({
                   </div>
                   {/*footer*/}
                   <div className="flex flex-col gap-2 p-6">
-                    <div className="flex flex-col divide-y p-2 rounded-md border border-black/30">
+                  <Button
+                      outline={true}
+                      label="Sign up"
+                      onClick={()=>{router.push('/auth/signup')}}
+                      icon={
+                        <BsFillKeyFill
+                          size={28}
+                         
+                        />
+                      }
+                    />
+                    {/* <div className="flex flex-col divide-y p-2 rounded-md border border-black/30">
                       <select
                         id="country-select"
                         className="px-3 py-2 focus:outline-none"
@@ -238,7 +250,7 @@ export default function Modal({
                         className="py-2 px-3 focus:outline-none h-full"
                         placeholder="Phone number"
                       />
-                    </div>
+                    </div> */}
                     <div
                       className="flex flex-row items-center gap-4 w-full
               "
@@ -260,6 +272,7 @@ export default function Modal({
 
                     {footer}
                   </div>
+                 
                 </div>
               </div>
             </div>

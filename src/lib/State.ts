@@ -30,9 +30,10 @@ const useUpdate = create<State & Action>((set) => ({
     useriod:number,
     productId:number
     quantity: number
-    image:string
     product:{
+      name:string
       description:string
+      image:string
       id:number
       price:7000
       user:any

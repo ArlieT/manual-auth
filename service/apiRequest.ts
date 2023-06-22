@@ -50,9 +50,10 @@ export const postProducts = async () => {
 
 
 export interface IaddToCart {
-    userEmail:string
-    quantity:number
-    productId:number
+    userEmail?:string
+    quantity?:number
+    productId?:number
+   
 
     
 }

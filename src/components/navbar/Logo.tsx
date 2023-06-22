@@ -14,8 +14,9 @@ function Logo() {
   //   height={100}
   //   className='hidden md:block cursor-pointer'
   //  />
-  <div className='font-bold text-2xl'>
-  e-comm
+  <div className=''>
+    <Image src='/images/logo.png' alt='logo' className=' absolute -top-[20px]' width={70} height={50} />
+    {/* <h1 className='text-2xl font-semibold'>Sneaker spot</h1> */}
   </div>
   )
 }

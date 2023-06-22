@@ -62,7 +62,7 @@ export const authOptions: NextAuthOptions = {
         
           return user;
         } else {
-          return null;
+          throw new Error("Invalid username or password");
         }
       },
     }),
@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth/signin',
     signOut: '/',
-    // error: '/auth/error', // Error code passed in query string as ?error=
+    error: '/auth/signup', // Error code passed in query string as ?error=
     newUser: '/' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   

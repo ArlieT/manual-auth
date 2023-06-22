@@ -15,7 +15,7 @@ function NavBar() {
 const {firstName:name,lastName,updateFirstName}= useUpdate();
   
   return (
-    <nav className="sticky z-50 top-0 w-full h-[80px] border bg-white">
+    <nav className="sticky z-50 top-0 w-full h-[80px]  bg-white">
         <div className="w-full h-full py-4  border-b-[1px]">
             <Container>
                    <div className="flex flex-row items-center justify-between gap-3 md:gap-0">

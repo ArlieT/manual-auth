@@ -4,9 +4,14 @@ const nextConfig = {
         baseURL: 'http://localhost/',
         // baseURL: 'https://fruitdev.xyz'
     },
-    images:{
-        domains:['lh3.googleusercontent.com','www.sportsdirect.com','cdn.shopify.com','sneakernews.com']
-    }
+    images: {
+        remotePatterns: [
+          {
+            protocol: "https",
+            hostname: "**",
+          },
+        ],
+      },
 }
 
 module.exports = nextConfig

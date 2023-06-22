@@ -1,16 +1,27 @@
 "use client";
 import { signIn } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AiFillEyeInvisible, AiOutlineEyeInvisible } from "react-icons/ai";
-export default function Signin() {
-  interface userAuth {
-    username: string;
-    password: string;
-  }
+import Image from "next/image";
 
-  const { handleSubmit, register, setError, watch,formState: { errors } } = useForm<userAuth>();
+interface userAuth {
+  username: string;
+  password: string;
+}
+export default function Signin() {
+  const {
+    handleSubmit,
+    register,
+    setError,
+    watch,
+    formState: { errors }
+  } = useForm<userAuth>();
   const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
+  const router = useRouter();
 
   // const onSubmit = async (data:userAuth)=>{
   //   console.log('on submit" ')
@@ -24,52 +35,95 @@ export default function Signin() {
 
   //   // console.log(result)
   // }
+  const [seePass, setSeePass] = useState("password");
+  const [errorLogin, setErrorLogin] = useState(false);
+  const [isSubmitting, setIsSubmtting] = useState(false);
 
-  const [seePass, setSeePass] = useState('password')
-  const [isSubmitting, setIsSubmtting] = useState(false)
 
-  const onSubmit = async (data:userAuth) => {
-    setIsSubmtting(true)
-    const result = await signIn("credentials", {
-      username: data.username,
-      password: data.password,
-      redirect: true,
-      callbackUrl: "/"
+
+  const notify = () => toast.error("Invalid Username or password!", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
     });
-    console.log({data})
+
+
+  const onSubmit = async (data: userAuth) => {
+    setIsSubmtting(true);
+    const signInResponse = await signIn("credentials", {
+      email: data.username,
+      password: data.password,
+      redirect: false
+    });
+
+    console.log(signInResponse);
+    if (signInResponse?.error !== "Invalid username or password") {
+      router.push("/");
+      setIsSubmtting(false);
+    } else {
+      notify();
+      setIsSubmtting(false);
+      // setErrorLogin(true);
+    }
   };
+
+  // useEffect(() => {
+  //   notify();
+  // }, [errorLogin]);
 
   return (
     <main className="h-screen flex flex-cols items-center justify-center text-black">
-
+       <ToastContainer position="top-center" hideProgressBar={false}  theme="light"/>
       {/* form con */}
-      <div className="min-w-[50%] flex flex-col items-center border py-5 rounded">
-        <h1 className="font-bold text-2xl my-2">Sign in with credentials\</h1>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-2/4 space-y-5  rounded mx-auto"
-      >
-        {errors.username && <p>{errors.username.message}</p>}
-        <div className=" flex justify-between items-center px-4 py-2 border">
-        <input type="text" {...register("username",{ maxLength: 16,required:"This field is require",})}  className="w-full focus:outline-none"/>
-        </div>
+      <div className="min-w-[45%] h-1/2 flex flex-col items-center justify-center border py-5 shadow bg-white  rounded">
+        <Image src='/images/logo.png' alt='logo' width={100} height={200}/>
+        <h1 className="font-bold text-2xl my-2">Sign in with credentials</h1>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col w-2/4 space-y-5  rounded mx-auto"
+        >
+          {errors.username && <p>{errors.username.message}</p>}
+          <div className=" flex justify-between items-center px-4 py-2 border">
+            <input
+              type="text"
+              {...register("username", {
+                maxLength: 16,
+                required: "This field is require"
+              })}
+              className="w-full focus:outline-none"
+            />
+          </div>
 
+          {errors.password && <p>{errors.password.message}</p>}
+          <div className=" flex justify-between items-center px-4 py-2 border">
+            <input
+              type={seePass}
+              {...register("password", {
+                min: 8,
+                maxLength: 20,
+                required: "Password is requuired"
+              })}
+              className="w-[85%] max-w-[85%] focus:outline-none "
+            />
+            {seePass === "password" ? (
+              <AiFillEyeInvisible onClick={() => setSeePass("text")} />
+            ) : (
+              <AiOutlineEyeInvisible
+                onClick={() => setSeePass("password")}
+                className="inline-flex"
+              />
+            )}
+          </div>
 
-
-        {errors.password && <p>{errors.password.message}</p>}
-        <div className=" flex justify-between items-center px-4 py-2 border">
-        <input type={seePass} {...register("password", {min:8,maxLength:20,required:"Password is requuired"})} className="w-[85%] max-w-[85%] focus:outline-none "/>
-          {seePass === 'password' ? 
-          <AiFillEyeInvisible onClick={()=>setSeePass('text')}/>
-           :
-          <AiOutlineEyeInvisible onClick={()=>setSeePass('password')} className="inline-flex"/>
-           }
-        </div>
-
-        <button className="w-full text-lg font-bold  border border-blue-500 hover:bg-blue-500 hover:text-white duration-200 py-2">
-          {isSubmitting ? 'Submitting...' : "Submit"}
-        </button>
-      </form>
+          <button className="w-full text-lg font-bold  border border-blue-500 hover:bg-blue-500 hover:text-white duration-200 py-2">
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </button>
+        </form>
       </div>
     </main>
   );

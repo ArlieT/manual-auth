@@ -22,40 +22,28 @@ import CartCom from "@/components/CartCom";
 
 function Home() {
   const [user, setuser] = React.useState<any>();
-  const { data } = useSession();
-
-
-
-  React.useEffect(() => {
-    console.log("session: ", data);
-  }, [data]);
+ 
 
   const [initialPlace, setInitialPlace] = React.useState(false);
-
-  window.onscroll = function () {
-    var distanceScrolled = document.documentElement.scrollTop;
-    console.log("Scrolled: " + distanceScrolled);
-    if (distanceScrolled > 6) {
-      setInitialPlace(false);
-    } else {
-      setInitialPlace(true);
-    }
-  };
-  const [firstName, setFirstName] = React.useState("arlie");
-
-  const { firstName: name, lastName, updateFirstName } = useUpdate();
-
- 
+  // if (window !== undefined) {
+  //   window.onscroll = function () {
+  //     var distanceScrolled = document.documentElement.scrollTop;
+  //     console.log("Scrolled: " + distanceScrolled);
+  //     if (distanceScrolled > 6) {
+  //       setInitialPlace(false);
+  //     } else {
+  //       setInitialPlace(true);
+  //     }
+  //   };
+  // }
 
   return (
     <main className="relative flex flex-col pt-4 items-center justify-center space-y-5 text-black bg-white h-full ">
       {/* <CategoryNav initialPlace={initialPlace} /> */}
-  
 
       <Product />
 
-      
-        <CartCom />
+      {/* <CartCom /> */}
     </main>
   );
 }

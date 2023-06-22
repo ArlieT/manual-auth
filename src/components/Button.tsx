@@ -23,8 +23,8 @@ export default function Button({label,onClick,disabled,icon:Icon,outline,small}:
       text-center
       hover:text-lg transition-all
       flex flex-row items-center justify-center gap-3
-      ${outline ? 'bg-white' : 'bg-rose-500'}
-      ${outline ? 'border-black' : 'border-rose-500'}
+      ${outline ? 'bg-white' : 'bg-black'}
+      ${outline ? 'border-black' : ''}
       ${outline ? 'text-black' : 'text-white'}
       ${small ? 'text-sm' : 'text-md'}
       ${small ? 'py-1' : 'py-3'}

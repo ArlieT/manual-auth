@@ -57,9 +57,11 @@ export default function UserMenu() {
         >
           <AiOutlineShoppingCart size={24} onClick={() => setCartModal(true)} />
 
-          <small className="absolute -top-1 right-1 bg-black w-[20px] h-[20px] text-center rounded-full text-white font-bold flex items-center justify-center">
-          {cartItemTotal}
-          </small>
+          {cartItemTotal > 0 && (
+            <small className="absolute -top-1 right-1 bg-black w-[20px] h-[20px] text-center rounded-full text-white font-bold flex items-center justify-center">
+              {cartItemTotal}
+            </small>
+          )}
         </div>
         <div
           onClick={toggleOpen}
