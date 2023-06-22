@@ -2,7 +2,6 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google"
 import prisma from "./prisma";
-import { serialize, deserialize } from 'superjson';
 export interface User {
   id?: string;
   user?: string;
@@ -60,7 +59,7 @@ export const authOptions: NextAuthOptions = {
             // Include any other necessary properties
           };
         
-          return user;
+          return user as any;
         } else {
           throw new Error("Invalid username or password");
         }
@@ -88,12 +87,12 @@ export const authOptions: NextAuthOptions = {
       console.log({ token });
       console.log({ user });
   
-      if (user) {
-        session.user.id = user.id;
-        session.user.email = user.email;
-        session.user.name = user.name;
-        // Include any other necessary properties
-      }
+      // if (user) {
+      //   session.user.id = user.id;
+      //   session.user.email = user.email;
+      //   session.user.name = user.name;
+      //   // Include any other necessary properties
+      // }
   
       // Serialize the session object
       const serializedSession = JSON.stringify(session);
