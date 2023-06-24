@@ -22,52 +22,52 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Product() {
   const [products, setProducts] = React.useState<IProduct[]>([
-    {
-      id: 0,
-      name: "Sample 1",
-      price: 290,
-      description:'sample',
-      image: "/images/p/p1.png",
-    },
-    {
-      id: 1,
-      name: "Sample 2",
-      price: 2000,
-      description:'sample',
-      image: "/images/p/p2.webp",
+    // {
+    //   id: 0,
+    //   name: "Sample 1",
+    //   price: 290,
+    //   description:'sample',
+    //   image: "/images/p/p1.png",
+    // },
+    // {
+    //   id: 1,
+    //   name: "Sample 2",
+    //   price: 2000,
+    //   description:'sample',
+    //   image: "/images/p/p2.webp",
 
-    },
-    {
-      id: 2,
-      name: "Sample 2",
-      price: 2000,
-      description:'sample',
-      image: "/images/p/p3.webp",
+    // },
+    // {
+    //   id: 2,
+    //   name: "Sample 2",
+    //   price: 2000,
+    //   description:'sample',
+    //   image: "/images/p/p3.webp",
 
-    },
-    {
-      id: 3,
-      name: "Sample 1",
-      price: 290,
-      description:'sample',
-      image: "/images/p/p1.png",
-    },
-    {
-      id: 4,
-      name: "Sample 2",
-      price: 2000,
-      description:'sample',
-      image: "/images/p/p2.webp",
+    // },
+    // {
+    //   id: 3,
+    //   name: "Sample 1",
+    //   price: 290,
+    //   description:'sample',
+    //   image: "/images/p/p1.png",
+    // },
+    // {
+    //   id: 4,
+    //   name: "Sample 2",
+    //   price: 2000,
+    //   description:'sample',
+    //   image: "/images/p/p2.webp",
 
-    },
-    {
-      id: 5,
-      name: "Sample 2",
-      price: 2000,
-      description:'sample',
-      image: "/images/p/p4.webp",
+    // },
+    // {
+    //   id: 5,
+    //   name: "Sample 2",
+    //   price: 2000,
+    //   description:'sample',
+    //   image: "/images/p/p4.webp",
 
-    },
+    // },
   ]);
   const [quantity, setQuantity] = React.useState(1);
   // const [cartItems, setCartItems] = React.useState([]);
