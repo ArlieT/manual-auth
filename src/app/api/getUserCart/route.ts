@@ -20,7 +20,6 @@ export async function POST(req: Request) {
             image: true,
             price: true,
             user: true
-
           }
         }
       }
@@ -30,11 +29,6 @@ export async function POST(req: Request) {
       console.log('user cart ', cart)
       return NextResponse.json({ cart })
     }
-
     return NextResponse.json({ message: "error getting items" }, { status: 500 })
-
-
   }
-
-
 }

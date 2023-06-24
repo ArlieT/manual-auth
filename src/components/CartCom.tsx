@@ -1,7 +1,7 @@
-import { cart } from "@/lib/State";
+import { useCart } from "@/lib/State";
 
 export default function CartCom() {
-  const { cartItems } = cart();
+  const { cartItems } = useCart();
   console.log("cart comp ", cartItems);
   return (
     <div>

@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { cart, cartModal } from "@/lib/State";
+import { useCart, useCartModal } from "@/lib/State";
 interface User {
   session: {
     expiration: Date;
@@ -40,8 +40,8 @@ export default function UserMenu() {
   };
   /* from zustand */
 
-  const { isShown, setCartModal } = cartModal();
-  const { cartItems, setCartItems } = cart();
+  const { isShown, setCartModal } = useCartModal();
+  const { cartItems, setCartItems } = useCart();
 
   console.log("cart items in nav", cartItems);
 
@@ -70,7 +70,7 @@ export default function UserMenu() {
           <AiOutlineMenu />
           <div className="relative hidden w-[30px] h-[30px] rounded-full overflow-hidden md:block">
             {session?.user?.image ? (
-              <Image
+            <Image
                 src={session ? session?.user?.image : "/"}
                 alt={session && session?.user?.name ? session?.user?.name : ""}
                 height={100}

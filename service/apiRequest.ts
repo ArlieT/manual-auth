@@ -78,6 +78,6 @@ export const getUserCart = async (id:any)=>{
 export const getUserDetails = async (email:any)=>{
 
     const res = await api.post('api/getUserId',email).then((res)=>res)
-    console.log('axios ', res)
+    console.log('getUserId ', res)
     return res.data
 }

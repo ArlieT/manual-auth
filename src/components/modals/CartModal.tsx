@@ -1,5 +1,5 @@
 "use client";
-import { cartModal, cart } from "@/lib/State";
+import { useCartModal, useCart } from "@/lib/State";
 import Image from "next/image";
 import React from "react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
@@ -8,8 +8,8 @@ import Progress from "../Progress";
 const Rock = Rock_Salt({ weight: "400", subsets: ["latin"] });
 
 export default function CartModal() {
-  const { isShown, setCartModal } = cartModal();
-  const { cartItems, setCartItems } = cart();
+  const { isShown, setCartModal } = useCartModal();
+  const { cartItems, setCartItems } = useCart();
   console.log("cart modal ", cartItems);
 
   return (
@@ -34,7 +34,7 @@ export default function CartModal() {
 
             <div className="flex flex-col relative max-h-full w-full ">
               {/* header */}
-              <div className="w-full border border-red-500  text-black bg-white shadow p-5    top-0  z-10">
+              <div className="w-full   text-black bg-white shadow p-5    top-0  z-10">
                 <h1
                   className={`text-4xl leading-[94px] align-middle font-bold text-gray-600 `}
                 >
@@ -43,7 +43,7 @@ export default function CartModal() {
               </div>
               <div className="flex max-h-full">
                 {/* first col */}
-                <div className="flex-1 px-2 overflow-y-auto h-full bg-white border border-red-500">
+                <div className="flex-1 px-2 overflow-y-auto h-full bg-white ">
                   {cartItems &&
                     cartItems.map((p) => {
                       return (
@@ -67,7 +67,7 @@ export default function CartModal() {
                             </strong>
 
                             <strong className="mb-4 text-gray-600 block">
-                              Seller: {p?.product?.user.username}
+                              Seller: {p?.product?.user?.username}
                             </strong>
                             <div className="flex  w-full space-x-12 flex-nowrap whitespace-nowrap">
                               <p className="mb-4 text-gray-600 block">
@@ -97,7 +97,7 @@ export default function CartModal() {
                     })}
                 </div>
                 {/* second col */}
-                <div className="relative max-h-full flex-1 flex flex-col  items-center    bg-white ">
+                <div className="relative pt-10 max-h-full flex-1 flex flex-col  items-center    bg-white ">
                   {/* <Progress /> */}
                   {/* form */}
                   <div className="flex flex-col space-y-12 w-[90%]">
