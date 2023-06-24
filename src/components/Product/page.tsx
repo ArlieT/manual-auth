@@ -252,7 +252,7 @@ export default function Product() {
       <main className="flex flex-col justify-center items-center w-full ">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-2 lg:grid-cols-3">
         
-          {products.map(renderProduct).reverse()}
+          {products.map(renderProduct)}
         </div>
 
         <AiOutlineShoppingCart className="text-4xl" />
