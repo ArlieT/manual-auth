@@ -26,48 +26,44 @@ export default function Product() {
       id: 0,
       name: "Sample 1",
       price: 290,
-      description:'sample',
-      image: "/images/p/p1.png",
+      description: "sample",
+      image: "/images/p/p1.png"
     },
     {
       id: 1,
       name: "Sample 2",
       price: 2000,
-      description:'sample',
-      image: "/images/p/p2.webp",
-
+      description: "sample",
+      image: "/images/p/p2.webp"
     },
     {
       id: 2,
       name: "Sample 2",
       price: 2000,
-      description:'sample',
-      image: "/images/p/p3.webp",
-
+      description: "sample",
+      image: "/images/p/p3.webp"
     },
     {
       id: 3,
       name: "Sample 1",
       price: 290,
-      description:'sample',
-      image: "/images/p/p1.png",
+      description: "sample",
+      image: "/images/p/p1.png"
     },
     {
       id: 4,
       name: "Sample 2",
       price: 2000,
-      description:'sample',
-      image: "/images/p/p2.webp",
-
+      description: "sample",
+      image: "/images/p/p2.webp"
     },
     {
       id: 5,
       name: "Sample 2",
       price: 2000,
-      description:'sample',
-      image: "/images/p/p4.webp",
-
-    },
+      description: "sample",
+      image: "/images/p/p4.webp"
+    }
   ]);
   const [quantity, setQuantity] = React.useState(1);
   // const [cartItems, setCartItems] = React.useState([]);
@@ -132,7 +128,7 @@ export default function Product() {
           setProducts((prevProducts) => [
             ...res.data.products,
             ...prevProducts
-          ]);  
+          ]);
         } else {
           alert(res.status);
         }
@@ -251,57 +247,15 @@ export default function Product() {
 
       <main className="flex flex-col justify-center items-center w-full ">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-2 lg:grid-cols-3">
-        
-          {products && products.length > 0 ? products.map(renderProduct) :  <div
-      
-        className="flex flex-col w-full p-6 mb-8 border rounded bg-white shadow text-black"
-      >
-        <strong className="text-xl mb-2 text-center"></strong>
-
-        <div className="w-full mb-4 overflow-hidden">
-          {/* <Image
-            src={p.image}
-            alt={p.name}
-            height={250}
-            width={350}
-            className=""
-          /> */}
-        </div>
-
-        <p className="mb-4 text-gray-600"></p>
-
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() =>
-                setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
-              }
-              className="px-4 py-2 rounded bg-blue-500 text-white"
-            >
-              <AiOutlineMinusCircle />
-            </button>
-            <strong className="text-xl">{quantity}</strong>
-            <button
-              onClick={() => setQuantity((prev) => prev + 1)}
-              className="px-4 py-2 rounded bg-blue-500 text-white"
-            >
-              <AiOutlinePlusCircle />
-            </button>
-          </div>
-
-          <button
-            className="px-4 py-2 rounded bg-black text-white whitespace-nowrap">
-            <AiOutlineShoppingCart className="inline align-middle" /> Add to
-            Cart
-          </button>
-        </div>
-      </div>}
+          {products && products.length ? (
+            products.map(renderProduct)
+          ) : (
+            <div>no data...</div>
+          )}
         </div>
 
         <AiOutlineShoppingCart className="text-4xl" />
-        <button
-          className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
-        >
+        <button className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap">
           add product
         </button>
       </main>
