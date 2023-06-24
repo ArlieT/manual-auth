@@ -34,14 +34,14 @@ export default function Product() {
       name: "Sample 2",
       price: 2000,
       description: "sample",
-      image: "/images/p/p2.webp"
+      image: "/images/p/p2.png"
     },
     {
       id: 2,
       name: "Sample 2",
       price: 2000,
       description: "sample",
-      image: "/images/p/p3.webp"
+      image: "/images/p/p3.png"
     },
     {
       id: 3,
@@ -55,14 +55,14 @@ export default function Product() {
       name: "Sample 2",
       price: 2000,
       description: "sample",
-      image: "/images/p/p2.webp"
+      image: "/images/p/p2.png"
     },
     {
       id: 5,
       name: "Sample 2",
       price: 2000,
       description: "sample",
-      image: "/images/p/p4.webp"
+      image: "/images/p/p4.png"
     }
   ]);
   const [quantity, setQuantity] = React.useState(1);
