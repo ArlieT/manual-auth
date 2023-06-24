@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Progress() {
   return (
-    <div className='absolute top-32 flex items-center justify-center my-12 w-full h-[10px] gap-1'>
+    <div className=' flex items-center justify-center my-12 w-full h-[10px] gap-1'>
         {/* circle */}
         <div className='relative'>
          <div className='  w-[14px] h-[14px] bg-black rounded-full'>

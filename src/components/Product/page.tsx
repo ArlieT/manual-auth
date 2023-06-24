@@ -1,6 +1,5 @@
 // 'use client'
 import {
-  AiOutlineLeft,
   AiOutlineMinusCircle,
   AiOutlinePlusCircle,
   AiOutlineShoppingCart
@@ -29,7 +28,6 @@ export default function Product() {
 
   const { data } = useSession();
   const userEmail = data?.user?.email;
-
   const notify = () =>
     toast("Addded Successfully ", {
       position: "top-center",
@@ -111,7 +109,7 @@ export default function Product() {
       }
     );
   };
-
+  console.log("arlie");
   React.useEffect(() => {
     if (userId) {
       getUserCartItem();
@@ -137,6 +135,62 @@ export default function Product() {
     getUser();
   }, [userEmail]);
 
+  const renderProduct = (p: any, index: any) => {
+    return (
+      <div
+        key={p.id}
+        className="flex flex-col w-full p-6 mb-8 border rounded bg-white shadow text-black"
+      >
+        <strong className="text-xl mb-2 text-center">{p?.name}</strong>
+
+        <div className="w-full mb-4 overflow-hidden">
+          <Image
+            src={p.image}
+            alt={p.name}
+            height={250}
+            width={350}
+            className=""
+          />
+        </div>
+
+        <p className="mb-4 text-gray-600">{p?.description}</p>
+
+        <div className="flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() =>
+                setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
+              }
+              className="px-4 py-2 rounded bg-blue-500 text-white"
+            >
+              <AiOutlineMinusCircle />
+            </button>
+            <strong className="text-xl">{quantity}</strong>
+            <button
+              onClick={() => setQuantity((prev) => prev + 1)}
+              className="px-4 py-2 rounded bg-blue-500 text-white"
+            >
+              <AiOutlinePlusCircle />
+            </button>
+          </div>
+
+          <button
+            onClick={() =>
+              handleAddToCart({
+                productId: Number(p.id),
+                quantity,
+                userEmail: userEmail || ""
+              })
+            }
+            className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
+          >
+            <AiOutlineShoppingCart className="inline align-middle" /> Add to
+            Cart
+          </button>
+        </div>
+      </div>
+    );
+  };
   return (
     <>
       <ToastContainer
@@ -147,7 +201,7 @@ export default function Product() {
 
       <main className="flex flex-col justify-center items-center w-full ">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-2 lg:grid-cols-3">
-          {products?.map((p) => {
+          {/* {products?.map((p,index) => {
             return (
               <div
                 key={p.id}
@@ -202,7 +256,8 @@ export default function Product() {
                 </div>
               </div>
             );
-          })}
+          })} */}
+          {products.map(renderProduct)}
         </div>
 
         <AiOutlineShoppingCart className="text-4xl" />

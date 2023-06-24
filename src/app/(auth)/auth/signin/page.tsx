@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillEyeInvisible, AiOutlineEyeInvisible } from "react-icons/ai";
+import {  CiUser,CiLock } from "react-icons/ci";
 import Image from "next/image";
 
 interface userAuth {
@@ -77,30 +78,33 @@ export default function Signin() {
   // }, [errorLogin]);
 
   return (
-    <main className="h-screen flex flex-cols items-center justify-center text-black">
+    <main className="gradient2  h-screen flex flex-cols items-center justify-center text-black">
        <ToastContainer position="top-center" hideProgressBar={false}  theme="light"/>
       {/* form con */}
-      <div className="min-w-[45%] h-1/2 flex flex-col items-center justify-center border py-5 shadow bg-white  rounded">
+      <div className="min-w-[40%] h-[80%] flex flex-col items-center justify-center border py-5 shadow bg-[#ffffff]  rounded">
         <Image src='/images/logo.png' alt='logo' width={100} height={200}/>
-        <h1 className="font-bold text-2xl my-2">Sign in with credentials</h1>
+        <h1 className="font-bold text-4xl my-2">Login</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col w-2/4 space-y-5  rounded mx-auto"
+          className="flex flex-col w-3/4 space-y-5  rounded mx-auto"
         >
           {errors.username && <p>{errors.username.message}</p>}
-          <div className=" flex justify-between items-center px-4 py-2 border">
+          <div className=" flex space-x-3 justify-between items-center px-4 py-2 border-b">
+            <CiUser className="h-6 w-6"/>
             <input
               type="text"
               {...register("username", {
                 maxLength: 16,
                 required: "This field is require"
               })}
-              className="w-full focus:outline-none"
+              placeholder="Type your username"
+              className="w-full focus:outline-none border-none"
             />
           </div>
 
           {errors.password && <p>{errors.password.message}</p>}
-          <div className=" flex justify-between items-center px-4 py-2 border">
+          <div className=" flex justify-between items-center px-4 py-2 border-b">
+            <CiLock className='h-6'/>
             <input
               type={seePass}
               {...register("password", {
@@ -108,6 +112,7 @@ export default function Signin() {
                 maxLength: 20,
                 required: "Password is requuired"
               })}
+              placeholder="Type your password"
               className="w-[85%] max-w-[85%] focus:outline-none "
             />
             {seePass === "password" ? (
@@ -120,7 +125,7 @@ export default function Signin() {
             )}
           </div>
 
-          <button className="w-full text-lg font-bold  border border-blue-500 hover:bg-blue-500 hover:text-white duration-200 py-2">
+          <button className="w-full text-lg font-bold  border hover:border-blue-500 bg-blue-500 hover:bg-white hover:text-black text-white duration-200 py-2">
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </form>

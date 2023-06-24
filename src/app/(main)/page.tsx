@@ -19,28 +19,55 @@ import { useState } from "react";
 import Product from "@/components/Product/page";
 import Cart from "./cart/page";
 import CartCom from "@/components/CartCom";
-
+import Image from "next/image";
+// import useEmblaCarousel from "embla-carousel-react/components/useEmblaCarousel";
+import useEmblaCarousel from 'embla-carousel-react'
 function Home() {
   const [user, setuser] = React.useState<any>();
- 
 
   const [initialPlace, setInitialPlace] = React.useState(false);
-  // if (window !== undefined) {
-  //   window.onscroll = function () {
-  //     var distanceScrolled = document.documentElement.scrollTop;
-  //     console.log("Scrolled: " + distanceScrolled);
-  //     if (distanceScrolled > 6) {
-  //       setInitialPlace(false);
-  //     } else {
-  //       setInitialPlace(true);
-  //     }
-  //   };
-  // }
-
+  
+  const [emblaRef] = useEmblaCarousel()
   return (
     <main className="relative flex flex-col pt-4 items-center justify-center space-y-5 text-black bg-white h-full ">
       {/* <CategoryNav initialPlace={initialPlace} /> */}
 
+      <div className="embla overflow-hidden" ref={emblaRef}>
+          <div className="embla__container ">
+            <div className="embla__slide">
+              <Image
+                src="/images/banner.png"
+                alt="banner"
+                width={2080}
+                height={200}
+              />
+              <div className="absolute text-white z-[99] md:right-24 right-0 top-40">
+                <h1 className="font-bold text-7xl">HOLIDAY SALE</h1>
+                <h2 className="text-3xl">NEW SALE STYLE ADDED</h2>
+              </div>
+            </div>
+            <div className="embla__slide">
+              <Image
+                src="/images/banner-2.png"
+                alt="banner"
+                width={2080}
+                height={200}
+              />
+              <div className="absolute text-black z-[99] right-24 top-40">
+                <h1 className="font-bold text-7xl">HOLIDAY SALE</h1>
+                <h2 className="text-3xl">NEW SALE STYLE ADDED</h2>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div
+        ref={emblaRef}
+        className="embla__slide w-screen pl-[1rem] relative  mx-2 flex flex-col items-center"
+      >
+        <div
+          className={`embla__slide__number w-full h-[4.6rem] z-10 top-[0.6rem] right-[0.6rem] border-[50%] font-bold pointer-events-none bg-gradient-to-r`}
+        ></div>
+      </div>
       <Product />
 
       {/* <CartCom /> */}
