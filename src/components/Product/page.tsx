@@ -211,14 +211,14 @@ export default function Product() {
               onClick={() =>
                 setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
               }
-              className="px-4 py-2 rounded bg-black text-white"
+              className="px-4 py-2 rounded bg-blue-500 text-white"
             >
               <AiOutlineMinusCircle />
             </button>
             <strong className="text-xl">{quantity}</strong>
             <button
               onClick={() => setQuantity((prev) => prev + 1)}
-              className="px-4 py-2 rounded bg-black text-white"
+              className="px-4 py-2 rounded bg-blue-500 text-white"
             >
               <AiOutlinePlusCircle />
             </button>
@@ -232,7 +232,7 @@ export default function Product() {
                 userEmail: userEmail || ""
               })
             }
-            className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
+            className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
           >
             <AiOutlineShoppingCart className="inline align-middle" /> Add to
             Cart

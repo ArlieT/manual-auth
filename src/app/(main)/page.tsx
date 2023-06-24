@@ -42,8 +42,8 @@ function Home() {
                 height={200}
               />
               <div className="absolute text-white z-[99] md:right-24 right-0 top-40">
-                <h1 className="font-bold text-7xl">HOLIDAY SALE</h1>
-                <h2 className="text-3xl">NEW SALE STYLE ADDED</h2>
+                <h1 className="font-bold text-2xl md:text-7xl">HOLIDAY SALE</h1>
+                <h2 className=" md:text-3xl">NEW SALE STYLE ADDED</h2>
               </div>
             </div>
             <div className="embla__slide">
@@ -53,9 +53,9 @@ function Home() {
                 width={4000}
                 height={200}
               />
-              <div className="absolute text-black z-[99] left-24 top-72">
-                <h1 className="font-bold text-7xl">GET YOURS NOW</h1>
-                <h2 className="text-3xl">GROUP 6</h2>
+              <div className="absolute text-black z-[99] left-24 top-32 lg:top-96">
+                <h1 className="font-bold text-4xl :text-7xl">GET YOURS NOW</h1>
+                <h2 className="md:text-3xl">GROUP 6</h2>
               </div>
             </div>
             <div className="embla__slide">
