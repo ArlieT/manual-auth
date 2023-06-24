@@ -121,20 +121,20 @@ export default function Product() {
   };
 
   const getAllProduct = async () => {
-    await getProducts().then(
-      (res) => {
-        console.log("sss");
-        if (res.data) {
-          setProducts((prevProducts) => [
-            ...res.data.products,
-            ...prevProducts
-          ]);
-        } else {
-          alert(res.status);
-        }
-      },
-      (error) => alert(error)
-    );
+    try {
+      const res = await getProducts();
+      if (res.data && res.data.products && res.data.products.length > 0) {
+        setProducts([...res.data.products]); // Set the fetched products
+      } else {
+        console.log("No products found");
+        // You can choose whether to keep the existing products or set an empty array
+        // setProducts([]);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      alert("Error fetching products");
+    }
+  
   };
 
   React.useEffect(() => {
@@ -249,7 +249,7 @@ export default function Product() {
 
       <main className="flex flex-col justify-center items-center w-full ">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-2 lg:grid-cols-3">
-          {products && products.length ? (
+          {products?.length ? (
             products.map((p: any, index: number) => {
               return (
                 <div
