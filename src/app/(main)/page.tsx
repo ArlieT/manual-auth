@@ -53,9 +53,9 @@ function Home() {
                 width={2080}
                 height={200}
               />
-              <div className="absolute text-black z-[99] right-24 top-40">
-                <h1 className="font-bold text-7xl">HOLIDAY SALE</h1>
-                <h2 className="text-3xl">NEW SALE STYLE ADDED</h2>
+              <div className="absolute text-black z-[99] left-24 top-72">
+                <h1 className="font-bold text-7xl">GET YOURS NOW</h1>
+                <h2 className="text-3xl">GROUP 6</h2>
               </div>
             </div>
           </div>
