@@ -6,7 +6,7 @@ import api from "./api"
 
 
 export interface IProduct {
-    id: string
+    id: number
     description: string
     name: string
     price: number
