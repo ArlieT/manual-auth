@@ -200,7 +200,6 @@ export default function Modal({
                       icon={<FcGoogle size={28} />}
                       onClick={handleSignIn}
                     />
-                  </div>
                   <div className="flex  items-center gap-2">
                     <hr className="w-full" /> or <hr className="w-full" />
                   </div>
@@ -253,7 +252,7 @@ export default function Modal({
                       />
                     </div> */}
                     <div
-                      className="flex flex-row items-center gap-4 w-full
+                      className="flex flex-row my-1 absolute md:relative bottom-2 mx-auto items-center gap-4 md:w-full w-[84%]
               "
                     >
                       {/* {secondaryAction && secondaryLabel && (
@@ -267,13 +266,13 @@ export default function Modal({
                       <Button
                         disabled={disabled}
                         label={actionLabel}
-                        onClick={handleSubmit}
+                       onClick={handleClose}
                       />
                     </div>
 
                     {footer}
                   </div>
-                 
+                </div>
                 </div>
               </div>
             </div>

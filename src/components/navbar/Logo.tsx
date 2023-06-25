@@ -14,8 +14,8 @@ function Logo() {
   //   height={100}
   //   className='hidden md:block cursor-pointer'
   //  />
-  <div className=''>
-    <Image src='/images/logo.png' alt='logo' className=' absolute -top-[20px]' width={70} height={50} />
+  <div className='hidden md:block relative  overflow-hidden w-48 max-h-[60px] h-24'>
+    <Image src='/images/logo-black.png' alt='logo' className='absolute -top-16'  width={200} height={100} />
     {/* <h1 className='text-2xl font-semibold'>Sneaker spot</h1> */}
   </div>
   )

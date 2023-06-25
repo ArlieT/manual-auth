@@ -24,46 +24,47 @@ export default function Product() {
   const [products, setProducts] = React.useState<IProduct[]>([
     {
       id: 0,
-      name: "Sample 1",
+      name: "Nike Blazer",
       price: 290,
-      description: "sample",
+      description: "Nike Blazer...",
       image: "/images/p/p1.png"
     },
     {
       id: 1,
-      name: "Sample 2",
+      name: "Adidas Samba",
       price: 2000,
-      description: "sample",
+      description: "Adidas Samba...",
       image: "/images/p/p2.png"
     },
     {
       id: 2,
-      name: "Sample 2",
+      name: "Vans Slip on",
       price: 2000,
-      description: "sample",
+      description: "Vans Slip on...",
       image: "/images/p/p3.png"
     },
     {
-      id: 3,
-      name: "Sample 1",
+      id: 0,
+      name: "Nike Blazer",
       price: 290,
-      description: "sample",
+      description: "Nike Blazer...",
       image: "/images/p/p1.png"
     },
     {
-      id: 4,
-      name: "Sample 2",
+      id: 1,
+      name: "Adidas Samba",
       price: 2000,
-      description: "sample",
+      description: "Adidas Samba...",
       image: "/images/p/p2.png"
     },
     {
-      id: 5,
-      name: "Sample 2",
+      id: 2,
+      name: "Vans Slip on",
       price: 2000,
-      description: "sample",
-      image: "/images/p/p4.png"
-    }
+      description: "Vans Slip on...",
+      image: "/images/p/p3.png"
+    },
+
   ]);
   const [quantity, setQuantity] = React.useState(1);
   // const [cartItems, setCartItems] = React.useState([]);
@@ -314,7 +315,7 @@ export default function Product() {
         </div>
 
         <AiOutlineShoppingCart className="text-4xl" />
-        <button className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap">
+        <button onClick={postProduct} className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap">
           add product
         </button>
       </main>

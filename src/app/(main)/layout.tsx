@@ -37,7 +37,7 @@ export default function RootLayout({
               isOpen={false}
               title="Log in or sign up"
               body={"Welcome to Airbnb"}
-              actionLabel="Continue"
+              actionLabel="Close"
               secondaryLabel="Google"
             />
             <NavBar />
