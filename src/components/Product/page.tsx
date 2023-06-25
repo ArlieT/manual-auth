@@ -18,53 +18,57 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCart, useModal } from "@/lib/State";
+import { useCart, useModal, useProduct } from "@/lib/State";
+import Loading from "@/app/(main)/loading";
 
 export default function Product() {
-  const [products, setProducts] = React.useState<IProduct[]>([
-    {
-      id: 0,
-      name: "Nike Blazer",
-      price: 290,
-      description: "Nike Blazer...",
-      image: "/images/p/p1.png"
-    },
-    {
-      id: 1,
-      name: "Adidas Samba",
-      price: 2000,
-      description: "Adidas Samba...",
-      image: "/images/p/p2.png"
-    },
-    {
-      id: 2,
-      name: "Vans Slip on",
-      price: 2000,
-      description: "Vans Slip on...",
-      image: "/images/p/p3.png"
-    },
-    {
-      id: 0,
-      name: "Nike Blazer",
-      price: 290,
-      description: "Nike Blazer...",
-      image: "/images/p/p1.png"
-    },
-    {
-      id: 1,
-      name: "Adidas Samba",
-      price: 2000,
-      description: "Adidas Samba...",
-      image: "/images/p/p2.png"
-    },
-    {
-      id: 2,
-      name: "Vans Slip on",
-      price: 2000,
-      description: "Vans Slip on...",
-      image: "/images/p/p3.png"
-    }
-  ]);
+  // const [products, setProducts] = React.useState<IProduct[]>([
+  //   {
+  //     id: 0,
+  //     name: "Nike Blazer",
+  //     price: 290,
+  //     description: "Nike Blazer...",
+  //     image: "/images/p/p1.png"
+  //   },
+  //   {
+  //     id: 1,
+  //     name: "Adidas Samba",
+  //     price: 2000,
+  //     description: "Adidas Samba...",
+  //     image: "/images/p/p2.png"
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Vans Slip on",
+  //     price: 2000,
+  //     description: "Vans Slip on...",
+  //     image: "/images/p/p3.png"
+  //   },
+  //   {
+  //     id: 0,
+  //     name: "Nike Blazer",
+  //     price: 290,
+  //     description: "Nike Blazer...",
+  //     image: "/images/p/p1.png"
+  //   },
+  //   {
+  //     id: 1,
+  //     name: "Adidas Samba",
+  //     price: 2000,
+  //     description: "Adidas Samba...",
+  //     image: "/images/p/p2.png"
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Vans Slip on",
+  //     price: 2000,
+  //     description: "Vans Slip on...",
+  //     image: "/images/p/p3.png"
+  //   }
+  // ]);
+
+
+  const {product,setProduct}= useProduct()
   const [quantity, setQuantity] = React.useState(1);
   // const [cartItems, setCartItems] = React.useState([]);
   const [userId, setUserId] = React.useState(null);
@@ -124,7 +128,7 @@ export default function Product() {
     try {
       const res = await getProducts();
       if (res.data && res.data.products && res.data.products.length > 0) {
-        setProducts([...res.data.products]); // Set the fetched products
+        setProduct([...res.data.products]); // Set the fetched products
       } else {
         console.log("No products found");
         // You can choose whether to keep the existing products or set an empty array
@@ -251,8 +255,8 @@ export default function Product() {
 
       <main className="flex flex-col justify-center items-center w-full ">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-2 lg:grid-cols-3">
-          {products?.length ? (
-            products.map((p: any, index: number) => {
+          {product?.length ? (
+            product.map((p: any, index: number) => {
               return (
                 <div
                   key={index}
@@ -271,8 +275,8 @@ export default function Product() {
                       className="hover:scale-105 translate-all duration-300"
                     />
                   </div>
-
-                  <p className="mb-4 text-gray-600">{p?.description}</p>
+                  <strong className="mb-1 text-gray-600">${p?.price}</strong>
+                  <p className=" text-gray-600">{p?.description}</p>
 
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-2">
@@ -321,7 +325,7 @@ export default function Product() {
               );
             })
           ) : (
-            <div>no data...</div>
+            <Loading/>
           )}
         </div>
 

@@ -108,3 +108,78 @@ export const useModal = create<Imodal>((set) => ({
   isOpen: false,
   setShowModal: (isOpen) => set({ isOpen }),
 }));
+
+
+/* for search */
+interface IProduct {
+  name: string;
+  description: string;
+  image: string;
+  id: number;
+  price: number;
+  user?: any;
+}
+
+interface IProductSetter {
+  product: IProduct[]
+  setProduct:(product:IProduct[])=>void
+}
+
+export const useProduct = create<IProductSetter>((set)=>({
+  product:[ {
+    id: 0,
+    name: "Nike Blazer",
+    price: 290,
+    description: "Nike Blazer...",
+    image: "/images/p/p1.png"
+  },
+  {
+    id: 1,
+    name: "Adidas Samba",
+    price: 2000,
+    description: "Adidas Samba...",
+    image: "/images/p/p2.png"
+  },
+  {
+    id: 2,
+    name: "Vans Slip on",
+    price: 2000,
+    description: "Vans Slip on...",
+    image: "/images/p/p3.png"
+  },
+  {
+    id: 0,
+    name: "Nike Blazer",
+    price: 290,
+    description: "Nike Blazer...",
+    image: "/images/p/p1.png"
+  },
+  {
+    id: 1,
+    name: "Adidas Samba",
+    price: 2000,
+    description: "Adidas Samba...",
+    image: "/images/p/p2.png"
+  },
+  {
+    id: 2,
+    name: "Vans Slip on",
+    price: 2000,
+    description: "Vans Slip on...",
+    image: "/images/p/p3.png"
+  }],
+  setProduct: (product:IProduct[] | []) => set({product}),
+}))
+
+interface Isearch{
+  isOpen: boolean;
+  setSearch: (isOpen: boolean) => void;
+}
+
+/* end for search */
+
+
+export const useSearch = create<Isearch>((set) => ({
+  isOpen: false,
+  setSearch: (isOpen) => set({ isOpen }),
+}));
