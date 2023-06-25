@@ -31,7 +31,7 @@ export default function Footer() {
             <p>Phone no.</p>
           </div>
         </div>
-        <div className=" flex flex-col whitespace-nowrap space-y-1  md:space-y-5 top-5 left-2/3  z-10">
+        <div className="hidden md:flex flex-col whitespace-nowrap space-y-1  md:space-y-5 top-5 left-2/3  z-10">
           <p className="text-lg font-bold text-white/80">Info</p>
           <div className="flex items-center space-x-2">
             <p>Lorem</p>
