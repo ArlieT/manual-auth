@@ -204,7 +204,7 @@ export default function Modal({
                     <hr className="w-full" /> or <hr className="w-full" />
                   </div>
                   {/*footer*/}
-                  <div className="flex flex-col gap-2 p-6">
+                  <div className="flex flex-col w-full gap-2 p-0">
                   <Button
                       outline={true}
                       label="Sign up"
@@ -252,7 +252,7 @@ export default function Modal({
                       />
                     </div> */}
                     <div
-                      className="flex flex-row my-1 absolute md:relative bottom-2 mx-auto items-center gap-4 md:w-full w-[84%]
+                      className="flex flex-row my-1 absolute inset-x-0 md:relative bottom-2 mx-auto items-center gap-4 md:w-full w-[84%]
               "
                     >
                       {/* {secondaryAction && secondaryLabel && (
