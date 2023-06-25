@@ -262,7 +262,7 @@ export default function Product() {
                     {p?.name}
                   </strong>
 
-                  <div className="w-full mb-4 overflow-hidden">
+                  <div className="min-h-[73%] max-h-[73%]  w-full mb-4 overflow-hidden">
                     <Image
                       src={p.image}
                       alt={p.name}

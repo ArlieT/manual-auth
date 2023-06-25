@@ -27,7 +27,7 @@ export default function CartModal() {
           <div className="w-[90%] relative h-[75%] flex flex-col items-center  rounded bg-white">
             <div className="flex flex-col relative max-h-full w-full ">
               {/* header */}
-              <div className="w-full  flex items-center justify-between text-black bg-white shadow p-5    top-0  z-10">
+              <div className="w-full  flex items-center justify-between text-black bg-white shadow px-4 md:p-5    top-0  z-10">
                 <h1
                   className={`text-4xl leading-[94px] align-middle font-bold text-gray-600 `}
                 >
@@ -89,7 +89,7 @@ export default function CartModal() {
                               Description: {p?.product?.description}
                             </p>
 
-                            <div className="abosolute w-2/3 text-center font-bold bottom-0 bg-black px-4 py-2 text-white">
+                            <div className="cursor-pointer hover:scale-[1.02] abosolute w-2/3 text-center font-bold bottom-0 bg-black px-4 py-2 text-white">
                               delete
                             </div>
                           </div>
@@ -98,7 +98,7 @@ export default function CartModal() {
                     })}
                 </div>
                 {/* second col */}
-                <div className="relative pt-10 max-h-full flex-1 flex flex-col  items-center    bg-white ">
+                <div className="hidden md:flex relative pt-10 max-h-full flex-1  flex-col  items-center    bg-white ">
                   {/* <Progress /> */}
                   {/* form */}
                   <div className="flex flex-col space-y-12 w-[90%]">
