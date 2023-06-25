@@ -32,7 +32,7 @@ export default function Profile() {
           <div className="bg-black h-20 w-full">
             <Image
               src={
-                session?.user?.image !== ""
+                session?.user?.image && session?.user?.image !== ""
                   ? session?.user?.image
                   : "/images/placeholder.jpg"
               }
