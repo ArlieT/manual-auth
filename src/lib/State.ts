@@ -98,3 +98,13 @@ export const useCartModal = create<CartModalState>((set) => ({
   isShown: false,
   setCartModal: (isShown) => set({ isShown }),
 }));
+
+interface Imodal{
+  isOpen: boolean;
+  setShowModal: (isOpen: boolean) => void;
+}
+
+export const useModal = create<Imodal>((set) => ({
+  isOpen: false,
+  setShowModal: (isOpen) => set({ isOpen }),
+}));

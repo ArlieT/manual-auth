@@ -18,7 +18,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCart } from "@/lib/State";
+import { useCart, useModal } from "@/lib/State";
 
 export default function Product() {
   const [products, setProducts] = React.useState<IProduct[]>([
@@ -63,8 +63,7 @@ export default function Product() {
       price: 2000,
       description: "Vans Slip on...",
       image: "/images/p/p3.png"
-    },
-
+    }
   ]);
   const [quantity, setQuantity] = React.useState(1);
   // const [cartItems, setCartItems] = React.useState([]);
@@ -135,7 +134,6 @@ export default function Product() {
       console.error("Error fetching products:", error);
       alert("Error fetching products");
     }
-  
   };
 
   React.useEffect(() => {
@@ -182,8 +180,10 @@ export default function Product() {
     };
 
     getUser();
-    console.log(userEmail)
+    console.log(userEmail);
   }, [userEmail]);
+
+  const { setShowModal, isOpen } = useModal();
 
   const renderProduct = (p: any, index: any) => {
     return (
@@ -225,13 +225,13 @@ export default function Product() {
           </div>
 
           <button
-            onClick={() =>
+            onClick={() => {
               handleAddToCart({
                 productId: Number(p.id),
                 quantity,
                 userEmail: userEmail
-              })
-            }
+              });
+            }}
             className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
           >
             <AiOutlineShoppingCart className="inline align-middle" /> Add to
@@ -293,19 +293,29 @@ export default function Product() {
                       </button>
                     </div>
 
-                    <button
-                      onClick={() =>
-                        handleAddToCart({
-                          productId: Number(p.id),
-                          quantity,
-                          userEmail: userEmail || ""
-                        })
-                      }
-                      className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
-                    >
-                      <AiOutlineShoppingCart className="inline align-middle" />{" "}
-                      Add to Cart
-                    </button>
+                    {userEmail ? (
+                      <button
+                        onClick={() =>
+                          handleAddToCart({
+                            productId: Number(p.id),
+                            quantity,
+                            userEmail: userEmail || ""
+                          })
+                        }
+                        className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
+                      >
+                        <AiOutlineShoppingCart className="inline align-middle" />{" "}
+                        Add to Cart
+                      </button>
+                    ) : (
+                      <button
+                        onClick={()=>setShowModal(!isOpen)}
+                        className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
+                      >
+                        <AiOutlineShoppingCart className="inline align-middle" />{" "}
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               );
@@ -316,7 +326,10 @@ export default function Product() {
         </div>
 
         <AiOutlineShoppingCart className="text-4xl" />
-        <button onClick={postProduct} className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap">
+        <button
+          onClick={postProduct}
+          className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
+        >
           add product
         </button>
       </main>

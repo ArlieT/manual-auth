@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import Button from "../Button";
 import Signin from "@/app/(auth)/auth/signin/page";
+import { useModal } from "@/lib/State";
 interface ModalProps {
   isOpen?: boolean;
   onClose?: () => void;
@@ -28,12 +29,14 @@ export default function Modal({
   body,
   disabled,
   footer,
-  isOpen,
+  // isOpen,
   secondaryLabel,
   secondaryAction,
   title
 }: ModalProps) {
-  const [showModal, setShowModal] = useState(isOpen);
+  const { setShowModal, isOpen } = useModal();
+  // const [showModal, setShowModal] = useState(isOpen);
+
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -102,7 +105,7 @@ export default function Modal({
   const router = useRouter()
   return (
     <>
-      {showModal ? (
+      {isOpen ? (
         <>
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed 
@@ -133,8 +136,8 @@ export default function Modal({
         translate
         duration-300
         h-full
-        ${showModal ? "translate-y-0" : "translate-y-full"}
-        ${showModal ? "opacity-100" : "opacity-0"}
+        ${isOpen ? "translate-y-0" : "translate-y-full"}
+        ${isOpen ? "opacity-100" : "opacity-0"}
       `}
               >
                 <div
