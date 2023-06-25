@@ -25,21 +25,22 @@ export default function CartModal() {
     "
         >
           <div className="w-[90%] relative h-[75%] flex flex-col items-center  rounded bg-white">
-            <button
-              onClick={() => setCartModal(false)}
-              className="absolute right-6 top-5"
-            >
-              Close
-            </button>
-
             <div className="flex flex-col relative max-h-full w-full ">
               {/* header */}
-              <div className="w-full   text-black bg-white shadow p-5    top-0  z-10">
+              <div className="w-full  flex items-center justify-between text-black bg-white shadow p-5    top-0  z-10">
                 <h1
                   className={`text-4xl leading-[94px] align-middle font-bold text-gray-600 `}
                 >
                   Checkout
                 </h1>
+                <button
+                  onClick={() => setCartModal(false)}
+                  className="flex  items-center   w-10 h-10  pb-2  px-4 py-3 hover:scale-[1.02] bg-black font-semibold text-white rounded-full"
+                >
+                  <p className=" -translate-x-[1px]  -translate-y-[1px]    align-top leading-[35px]">
+                    X
+                  </p>
+                </button>
               </div>
               <div className="flex max-h-full">
                 {/* first col */}

@@ -93,7 +93,7 @@ export default function Product() {
     let params = {
       productId: productId,
       quantity: quantity,
-      userEmail: userEmail || "torresarlie22@gmail.com"
+      userEmail: userEmail
     };
     notify();
 
@@ -182,6 +182,7 @@ export default function Product() {
     };
 
     getUser();
+    console.log(userEmail)
   }, [userEmail]);
 
   const renderProduct = (p: any, index: any) => {

@@ -6,6 +6,7 @@ import NavBar from "@/components/navbar/NavBar";
 import Modal from "@/components/modals/Modal";
 import SessionWrapper from "../Sessionwrapper";
 import CartModal from "@/components/modals/CartModal";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Tehcno project",
@@ -42,6 +43,7 @@ export default function RootLayout({
             />
             <NavBar />
             {children}
+            <Footer/>
           </SessionWrapper>
         {/* </LocalizationProvider> */}
       </body>
