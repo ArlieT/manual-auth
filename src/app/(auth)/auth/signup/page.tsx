@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 type User = {
   username: string;
   password: string;
-  email:string
+  email: string;
 };
 
 export default function Register() {
@@ -18,7 +18,7 @@ export default function Register() {
   } = useForm<User>();
 
   const onSubmit = (data: User) => {
-    signUp(data.username, data.password,data.email).then((res) => {
+    signUp(data.username, data.password, data.email).then((res) => {
       if (res.data.msg === "Successful") {
         router.push("/auth/signin");
       }
@@ -26,45 +26,50 @@ export default function Register() {
   };
 
   return (
-    <main className="flex items-center justify-center h-screen  bg-white">
+    <main className="gradient2 flex items-center justify-center h-screen  bg-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col border space-y-12 p-5 rounded-md shadow bg-blue-950 text-white"
+        className="w-[80%] md:max-w-[35%] h-[80%] flex flex-col justify-center space-y-8 items-center  border py-5 shadow bg-[#ffffff]  rounded"
       >
+        <h1 className="text-4xl font-bold mb-12">Signup</h1>
         {/* register your input into the hook by invoking the "register" function */}
-        <div className="flex flex-col">
-          <label htmlFor="username">username</label>
+        <div className="w-[80%] border-b flex flex-col">
+          {/* <label htmlFor="username">username</label> */}
           <input
             {...register("username")}
             type="text"
             id="username"
-            className="bg-blue-950/30 px-2 py-0.5 border focus:outline-none"
+            placeholder="username"
+            className="w-full pl-2 focus:outline-none border-none"
           />
         </div>
 
         {/* include validation with required or other standard HTML validation rules */}
-        <div className="flex flex-col">
-          <label htmlFor="password">password</label>
+        <div className="w-[80%] border-b flex flex-col">
+          {/* <label htmlFor="password">password</label> */}
           <input
             {...register("password", { required: true })}
             type="password"
             id="password"
-            className="bg-blue-950/30 px-2 py-0.5 border focus:outline-none"
+            placeholder="username"
+            className="w-full pl-2 focus:outline-none border-none"
           />
           {/* errors will return when field validation fails  */}
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="email">email</label>
+        <div className="border-b w-[80%] flex flex-col">
+          {/* <label htmlFor="email">email</label> */}
           <input
             {...register("email", { required: true })}
             type="email"
+            
             id="email"
-            className="bg-blue-950/30 px-2 py-0.5 border focus:outline-none"
+            placeholder="email"
+            className="w-full pl-2 focus:outline-none border-none"
           />
           {/* errors will return when field validation fails  */}
         </div>
 
-        <button className="border-white border rounded py-2">submit</button>
+        <button className="w-[80%] bg-black text-white hover:bg-white duration-100  hover:border-black b hover:text-black  mt-12 border rounded py-2">submit</button>
       </form>
     </main>
   );
