@@ -268,7 +268,7 @@ export default function Product() {
                       alt={p.name}
                       height={250}
                       width={350}
-                      className="hover:rotate-90 translate-all duration-300"
+                      className="hover:scale-105 translate-all duration-300"
                     />
                   </div>
 
