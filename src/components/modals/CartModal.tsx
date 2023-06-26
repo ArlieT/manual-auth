@@ -16,7 +16,7 @@ export default function CartModal() {
     <>
       {isShown && (
         <div
-          className="justify-center items-center flex overflow-x-hidden  fixed 
+          className="h-screen justify-center items-center flex   fixed 
       inset-0 
       z-50 
       outline-none 
@@ -24,8 +24,8 @@ export default function CartModal() {
       bg-neutral-800/70
     "
         >
-          <div className="w-[90%] relative h-[75%] flex flex-col items-center  rounded bg-white">
-            <div className="flex flex-col relative max-h-full w-full ">
+          <div className="w-[90%] relative h-[65%] flex flex-col items-center  border z-50 bg-black rounded-md ">
+            <div className="flex flex-col relative max-h-full w-full  ">
               {/* header */}
               <div className="w-full  flex items-center justify-between text-black bg-white shadow px-4 md:p-5    top-0  z-10">
                 <h1
@@ -52,7 +52,7 @@ export default function CartModal() {
                           key={p.id}
                           className="flex flex-col md:flex-row  mt-12  space-x-6 items-center justify-between w-[100%] h-auto p-6 mb-8 border rounded bg-white shadow text-black"
                         >
-                          <div className="w-[70%] flex items-center justify-center border h-[20rem] mb-4 overflow-hidden">
+                          <div className="w-[70%] flex items-center justify-center  h-[20rem] mb-4 overflow-hidden">
                             <Image
                               src={p?.product?.image}
                               alt={p?.product.name}
