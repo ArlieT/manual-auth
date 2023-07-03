@@ -5,6 +5,7 @@ import React from "react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { Rock_Salt } from "next/font/google";
 import Progress from "../Progress";
+import { useSession } from "next-auth/react";
 const Rock = Rock_Salt({ weight: "400", subsets: ["latin"] });
 
 export default function CartModal() {
@@ -24,7 +25,7 @@ export default function CartModal() {
       bg-neutral-800/70
     "
         >
-          <div className="w-[90%] relative h-[75%] flex flex-col items-center  rounded bg-white">
+          <div className="w-[90%] relative h-[75%] flex flex-col items-center   z-[99] overflow-hidden rounded-md bg-black">
             <div className="flex flex-col relative max-h-full w-full ">
               {/* header */}
               <div className="w-full  flex items-center justify-between text-black bg-white shadow px-4 md:p-5    top-0  z-10">
@@ -52,7 +53,7 @@ export default function CartModal() {
                           key={p.id}
                           className="flex flex-col md:flex-row  mt-12  space-x-6 items-center justify-between w-[100%] h-auto p-6 mb-8 border rounded bg-white shadow text-black"
                         >
-                          <div className="w-[70%] flex items-center justify-center border h-[20rem] mb-4 overflow-hidden">
+                          <div className="w-[70%] flex items-center justify-center  h-[20rem] mb-4 overflow-hidden">
                             <Image
                               src={p?.product?.image}
                               alt={p?.product.name}
@@ -68,7 +69,7 @@ export default function CartModal() {
                             </strong>
 
                             <strong className="mb-4 text-gray-600 block">
-                              Seller: {p?.product?.user?.username}
+                              Seller: {p.userId}
                             </strong>
                             <div className="flex  w-full space-x-12 flex-nowrap whitespace-nowrap">
                               <p className="mb-4 text-gray-600 block">
@@ -98,7 +99,7 @@ export default function CartModal() {
                     })}
                 </div>
                 {/* second col */}
-                <div className="hidden md:flex relative pt-10 max-h-full flex-1  flex-col  items-center    bg-white ">
+                <div className="hidden lg:flex relative pt-10 max-h-full flex-1  flex-col  items-center    bg-white ">
                   {/* <Progress /> */}
                   {/* form */}
                   <div className="flex flex-col space-y-12 w-[90%]">

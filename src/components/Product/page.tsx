@@ -20,56 +20,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCart, useModal, useProduct } from "@/lib/State";
 import Loading from "@/app/(main)/loading";
+import { truncate, truncateTitle } from "../../../utils/trancuate";
+import Heart from "../Heart";
 
 export default function Product() {
-  // const [products, setProducts] = React.useState<IProduct[]>([
-  //   {
-  //     id: 0,
-  //     name: "Nike Blazer",
-  //     price: 290,
-  //     description: "Nike Blazer...",
-  //     image: "/images/p/p1.png"
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Adidas Samba",
-  //     price: 2000,
-  //     description: "Adidas Samba...",
-  //     image: "/images/p/p2.png"
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Vans Slip on",
-  //     price: 2000,
-  //     description: "Vans Slip on...",
-  //     image: "/images/p/p3.png"
-  //   },
-  //   {
-  //     id: 0,
-  //     name: "Nike Blazer",
-  //     price: 290,
-  //     description: "Nike Blazer...",
-  //     image: "/images/p/p1.png"
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Adidas Samba",
-  //     price: 2000,
-  //     description: "Adidas Samba...",
-  //     image: "/images/p/p2.png"
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Vans Slip on",
-  //     price: 2000,
-  //     description: "Vans Slip on...",
-  //     image: "/images/p/p3.png"
-  //   }
-  // ]);
-
-
-  const {product,setProduct}= useProduct()
-  const [quantity, setQuantity] = React.useState(1);
+ 
+  const { product, setProduct } = useProduct();
+  // const [quantity, setQuantity] = React.useState(1);
+  const [quantities, setQuantities] = React.useState<{ [key: number]: number }>({});
   // const [cartItems, setCartItems] = React.useState([]);
   const [userId, setUserId] = React.useState(null);
 
@@ -189,62 +147,8 @@ export default function Product() {
 
   const { setShowModal, isOpen } = useModal();
 
-  const renderProduct = (p: any, index: any) => {
-    return (
-      <div
-        key={index}
-        className="flex flex-col w-full p-6 mb-8 border rounded bg-white shadow text-black"
-      >
-        <strong className="text-xl mb-2 text-center">{p?.name}</strong>
-
-        <div className="w-full mb-4 overflow-hidden">
-          <Image
-            src={p.image}
-            alt={p.name}
-            height={250}
-            width={350}
-            className=""
-          />
-        </div>
-
-        <p className="mb-4 text-gray-600">{p?.description}</p>
-
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() =>
-                setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
-              }
-              className="px-4 py-2 rounded bg-blue-500 text-white"
-            >
-              <AiOutlineMinusCircle />
-            </button>
-            <strong className="text-xl">{quantity}</strong>
-            <button
-              onClick={() => setQuantity((prev) => prev + 1)}
-              className="px-4 py-2 rounded bg-blue-500 text-white"
-            >
-              <AiOutlinePlusCircle />
-            </button>
-          </div>
-
-          <button
-            onClick={() => {
-              handleAddToCart({
-                productId: Number(p.id),
-                quantity,
-                userEmail: userEmail
-              });
-            }}
-            className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
-          >
-            <AiOutlineShoppingCart className="inline align-middle" /> Add to
-            Cart
-          </button>
-        </div>
-      </div>
-    );
-  };
+  
+  
   return (
     <>
       <ToastContainer
@@ -257,16 +161,14 @@ export default function Product() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:px-2 lg:grid-cols-3">
           {product?.length ? (
             product.map((p: any, index: number) => {
+              const productId = Number(p.id);
               return (
                 <div
                   key={index}
-                  className="flex flex-col w-full p-6 mb-8 border rounded bg-white shadow text-black"
+                  className="relative group  flex flex-col min-h-[500px] max-h-[500px] w-full px-4 py-4 mb-8  rounded bg-white shadow text-black"
                 >
-                  <strong className="text-xl mb-2 text-center">
-                    {p?.name}
-                  </strong>
-
-                  <div className="min-h-[71%] max-h-[71%]  w-full mb-4 overflow-hidden">
+                  <Heart/>
+                  <div className="min-h-[68%]  max-h-[68%]  w-full mb-4 overflow-hidden">
                     <Image
                       src={p.image}
                       alt={p.name}
@@ -275,23 +177,44 @@ export default function Product() {
                       className="hover:scale-105 translate-all duration-300"
                     />
                   </div>
-                  <strong className="mb-1 text-gray-600">${p?.price}</strong>
-                  <p className=" text-gray-600">{p?.description}</p>
+                  <p className=" font-bold text-xl mb-2 ">
+                    {truncateTitle(p?.name)}
+                  </p>
+                  <div className="flex  items-center">
+                  <p className="mb-1 font-bold text-gray-600 mr-4">${p?.price}</p>
+                  <p> | </p>
+                  <small className=" text-gray-600 ml-4">
+                    {truncate(p?.description)}
+                  </small>
+                  </div>
 
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-2">
                       <button
+                        // onClick={() =>
+                        //   setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
+                        // }
                         onClick={() =>
-                          setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
+                          setQuantities((prevQuantities) => ({
+                            ...prevQuantities,
+                            [productId]: (prevQuantities[productId] || 1) - 1 // Decrease the quantity for the specific product
+                          }))
                         }
-                        className="px-4 py-2 rounded bg-blue-500 text-white"
+                        className=" rounded-full w-10 h-10 flex items-center justify-center bg-black/80 text-white"
                       >
                         <AiOutlineMinusCircle />
                       </button>
-                      <strong className="text-xl">{quantity}</strong>
+                      <strong key={index} className="text-xl">
+                      {quantities[productId] || 1}
+                      </strong>
                       <button
-                        onClick={() => setQuantity((prev) => prev + 1)}
-                        className="px-4 py-2 rounded bg-blue-500 text-white"
+                        onClick={() =>
+                          setQuantities((prevQuantities) => ({
+                            ...prevQuantities,
+                            [productId]: (prevQuantities[productId] || 1) + 1
+                          }))
+                        }
+                        className=" rounded-full  w-10 h-10 flex items-center justify-center bg-black/80 text-white"
                       >
                         <AiOutlinePlusCircle />
                       </button>
@@ -302,22 +225,22 @@ export default function Product() {
                         onClick={() =>
                           handleAddToCart({
                             productId: Number(p.id),
-                            quantity,
+                            quantities,
                             userEmail: userEmail || ""
                           })
                         }
-                        className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
+                        className="px-4 py-2 w-20 max-h-10 max-w-20 mt-2 rounded-full transition-all hover:bg-white hover:text-black hover:border-black  bg-black/80 hover:border duration-150 text-white whitespace-nowrap"
                       >
                         <AiOutlineShoppingCart className="inline align-middle" />{" "}
-                        Add to Cart
+                        +
                       </button>
                     ) : (
                       <button
-                        onClick={()=>setShowModal(!isOpen)}
-                        className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
+                        onClick={() => setShowModal(!isOpen)}
+                        className="px-4 py-2 w-20 max-h-10 max-w-20 rounded-full mt-2  transition-all bg-black/80 hover:bg-white hover:text-black border-black hover:border duration-150 text-white whitespace-nowrap"
                       >
                         <AiOutlineShoppingCart className="inline align-middle" />{" "}
-                        Add to Cart
+                        +
                       </button>
                     )}
                   </div>
@@ -325,17 +248,11 @@ export default function Product() {
               );
             })
           ) : (
-            <Loading/>
+            <Loading />
           )}
         </div>
 
-        <AiOutlineShoppingCart className="text-4xl" />
-        <button
-          onClick={postProduct}
-          className="px-4 py-2 rounded bg-blue-500 text-white whitespace-nowrap"
-        >
-          add product
-        </button>
+      
       </main>
     </>
   );
