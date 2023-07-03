@@ -37,7 +37,7 @@ export default function RootLayout({
               // secondaryAction={() => {}}
               isOpen={false}
               title="Log in or sign up"
-              body={"Welcome to Airbnb"}
+              body={"Welcome to Solely Shoes"}
               actionLabel="Close"
               secondaryLabel="Google"
             />

@@ -17,7 +17,7 @@ export default function CartModal() {
     <>
       {isShown && (
         <div
-          className="justify-center items-center flex overflow-x-hidden  fixed 
+          className="h-screen justify-center items-center flex   fixed 
       inset-0 
       z-50 
       outline-none 
