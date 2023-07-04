@@ -33,6 +33,11 @@ export default function Product() {
 
   const { data } = useSession();
   const userEmail = data?.user?.email;
+
+  React.useEffect(()=>{
+    console.log('quant ',quantities)
+  },[quantities])
+
   const notify = () =>
     toast("Addded Successfully ", {
       position: "top-center",
@@ -44,29 +49,43 @@ export default function Product() {
       progress: undefined,
       theme: "light"
     });
+    const erroNotif = () =>
+    toast("Error Adding to cart ", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light"
+    });
+
 
   const handleAddToCart = async ({
     productId,
-    quantity,
     userEmail
   }: IaddToCart | any) => {
-    console.log("auto run");
+  
+
+    const quantity = quantities[productId] || 1; 
+    
     let params = {
       productId: productId,
       quantity: quantity,
       userEmail: userEmail
     };
-    notify();
-
+    
     try {
       const res = await addToCart(params);
+      notify();
 
       console.log("add to cart ", res);
 
       setUserId(res);
     } catch (error) {
       console.error(error);
-      alert("Error adding to cart");
+      erroNotif();
     }
   };
 
@@ -225,7 +244,6 @@ export default function Product() {
                         onClick={() =>
                           handleAddToCart({
                             productId: Number(p.id),
-                            quantities,
                             userEmail: userEmail || ""
                           })
                         }

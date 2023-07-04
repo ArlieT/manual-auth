@@ -17,7 +17,7 @@ function NavBar() {
     if (query === "" || query === null) {
       return await getAllProduct(); // Return all products if query is empty
     }
-    const searchQuery = query.toLowerCase();
+    const searchQuery = query?.toLowerCase();
     return product.filter((e) => {
       const productName = e.name.toLowerCase();
       const productPrice = String(e.price).toLowerCase();

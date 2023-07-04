@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       data: {
         user: { connect: { id: Number(user.id) } },
         product: { connect: { id: Number(productId) } },
-        quantity: Number(quantity),
+        quantity: parseInt(quantity),
       },
     });
 
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
 
   } catch (error) {
     console.log({ error })
-    NextResponse.json({ message: error }, { status: 500 })
+    return NextResponse.json({ message: error }, { status: 500 })
   }
 }
 

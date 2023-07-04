@@ -41,51 +41,52 @@ interface CartState {
 }
 
 export const useCart = create<CartState>((set) => ({
-  cartItems: [
-    {
-      id: 0,
-      userId: 0,
-      productId: 0,
-      quantity: 0,
-      product: {
-        name: "Nike blazer",
-        price: 290,
-        description: "Nike blazer...",
-        image: "/images/p/p1.png",
-        id: 0,
-        user: null,
-      },
-    },
-    {
-      id: 0,
-      userId: 0,
-      productId: 0,
-      quantity: 0,
-      product: {
-        name: "Adidas samba",
-        price: 290,
-        description: "Adidas samba...",
-        image: "/images/p/p2.png",
-        id: 0,
-        user: null,
-      },
-    },
-    {
-      id: 0,
-      userId: 0,
-      productId: 0,
-      quantity: 0,
-      product: {
-        name: "Converse",
-        price: 290,
-        description: "Converse...",
-        image: "/images/p/p3.png",
-        id: 0,
-        user: null,
-      },
-    },
-    // Add other initial cart items here
-  ],
+  // cartItems: [
+  //   {
+  //     id: 0,
+  //     userId: 0,
+  //     productId: 0,
+  //     quantity: 0,
+  //     product: {
+  //       name: "Nike blazer",
+  //       price: 290,
+  //       description: "Nike blazer...",
+  //       image: "/images/p/p1.png",
+  //       id: 0,
+  //       user: null,
+  //     },
+  //   },
+  //   {
+  //     id: 0,
+  //     userId: 0,
+  //     productId: 0,
+  //     quantity: 0,
+  //     product: {
+  //       name: "Adidas samba",
+  //       price: 290,
+  //       description: "Adidas samba...",
+  //       image: "/images/p/p2.png",
+  //       id: 0,
+  //       user: null,
+  //     },
+  //   },
+  //   {
+  //     id: 0,
+  //     userId: 0,
+  //     productId: 0,
+  //     quantity: 0,
+  //     product: {
+  //       name: "Converse",
+  //       price: 290,
+  //       description: "Converse...",
+  //       image: "/images/p/p3.png",
+  //       id: 0,
+  //       user: null,
+  //     },
+  //   },
+  //   // Add other initial cart items here
+  // ],
+  cartItems:[],
   setCartItems: (cartItems) => set({ cartItems }),
 }));
 
@@ -126,48 +127,49 @@ interface IProductSetter {
 }
 
 export const useProduct = create<IProductSetter>((set)=>({
-  product:[ {
-    id: 0,
-    name: "Nike Blazer",
-    price: 290,
-    description: "Nike Blazer...",
-    image: "/images/p/p1.png"
-  },
-  {
-    id: 1,
-    name: "Adidas Samba",
-    price: 2000,
-    description: "Adidas Samba...",
-    image: "/images/p/p2.png"
-  },
-  {
-    id: 2,
-    name: "Vans Slip on",
-    price: 2000,
-    description: "Vans Slip on...",
-    image: "/images/p/p3.png"
-  },
-  {
-    id: 0,
-    name: "Nike Blazer",
-    price: 290,
-    description: "Nike Blazer...",
-    image: "/images/p/p1.png"
-  },
-  {
-    id: 1,
-    name: "Adidas Samba",
-    price: 2000,
-    description: "Adidas Samba...",
-    image: "/images/p/p2.png"
-  },
-  {
-    id: 2,
-    name: "Vans Slip on",
-    price: 2000,
-    description: "Vans Slip on...",
-    image: "/images/p/p3.png"
-  }],
+  // product:[ {
+  //   id: 0,
+  //   name: "Nike Blazer",
+  //   price: 290,
+  //   description: "Nike Blazer...",
+  //   image: "/images/p/p1.png"
+  // },
+  // {
+  //   id: 1,
+  //   name: "Adidas Samba",
+  //   price: 2000,
+  //   description: "Adidas Samba...",
+  //   image: "/images/p/p2.png"
+  // },
+  // {
+  //   id: 2,
+  //   name: "Vans Slip on",
+  //   price: 2000,
+  //   description: "Vans Slip on...",
+  //   image: "/images/p/p3.png"
+  // },
+  // {
+  //   id: 0,
+  //   name: "Nike Blazer",
+  //   price: 290,
+  //   description: "Nike Blazer...",
+  //   image: "/images/p/p1.png"
+  // },
+  // {
+  //   id: 1,
+  //   name: "Adidas Samba",
+  //   price: 2000,
+  //   description: "Adidas Samba...",
+  //   image: "/images/p/p2.png"
+  // },
+  // {
+  //   id: 2,
+  //   name: "Vans Slip on",
+  //   price: 2000,
+  //   description: "Vans Slip on...",
+  //   image: "/images/p/p3.png"
+  // }],
+  product:[],
   setProduct: (product:IProduct[] | []) => set({product}),
 }))
 
