@@ -118,18 +118,18 @@ export default function Signin() {
                 className="w-[85%] max-w-[85%] focus:outline-none "
               />
               {seePass === "password" ? (
-                <AiFillEyeInvisible onClick={() => setSeePass("text")} />
+                <AiFillEyeInvisible className="cursor-pointer" onClick={() => setSeePass("text")} />
               ) : (
                 <AiOutlineEyeInvisible
                   onClick={() => setSeePass("password")}
-                  className="inline-flex"
+                  className="inline-flex cursor-pointer"
                 />
               )}
             </div>
             <button type="button" onClick={()=>router.push('/auth/signup')} className="text-end w-full text-sm  text-blue-500 underline-offset-2 underline">register?</button>
           </div>
 
-          <button className=" w-full mt-12 text-lg font-bold  border hover:border-blue-500 bg-blue-500 hover:bg-white hover:text-black text-white duration-200 py-2">
+          <button className=" w-full mt-12 text-lg font-bold  border hover:border-black bg-black/80 hover:bg-white hover:text-black text-white duration-200 py-2">
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </form>
